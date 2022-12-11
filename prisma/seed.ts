@@ -3,16 +3,21 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-  const admin = await prisma.user.create({
-    data: {
-      username: 'admin',
-      email: 'admin@test.com',
-      first_name: 'admin',
-      last_name: 'test',
-      role: 'ADMIN',
-      password: encrypt('password'),
-    },
-  })
+  const admin = await prisma.user
+    .create({
+      data: {
+        username: 'admin',
+        email: 'admin@test.com',
+        first_name: 'admin',
+        last_name: 'test',
+        role: 'ADMIN',
+        password: encrypt('password'),
+      },
+    })
+    .then((re) => {
+      console.log(re)
+    })
+    .catch((err) => console.log(err))
   console.log({ admin })
 }
 main()
