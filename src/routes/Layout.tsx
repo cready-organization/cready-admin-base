@@ -9,6 +9,9 @@ function Layout() {
         <nav>
           <ul>
             <li>
+              <Link to={""}>Homepage</Link>
+            </li>
+            <li>
               <Link to={"/auth/login"}>Login</Link>
             </li>
             <li>

@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import Login from "../pages/auth/Login";
 import ResetPassword from "../pages/auth/ResetPassword";
@@ -10,11 +10,22 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    loader: () => {
+      return redirect("/auth");
+    },
+    errorElement: <PageNotFound />,
   },
   {
     path: "/auth",
+    element: <Layout />,
     errorElement: <PageNotFound />,
     children: [
+      {
+        path: "",
+        loader: () => {
+          return redirect("login");
+        },
+      },
       {
         path: "login",
         element: <Login />,
@@ -28,6 +39,10 @@ export const router = createBrowserRouter([
         element: <ForgotPassword />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 
