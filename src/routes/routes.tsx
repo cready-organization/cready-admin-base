@@ -6,6 +6,7 @@ import PageNotFound from "../pages/error/PageNotFound";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import Login from "../pages/auth/Login";
+import AuthLayout from "../pages/auth/AuthLayout";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/auth",
+    element: <AuthLayout></AuthLayout>,
     loader: async () => {
       const isAuthenticated = await verifyCredential();
       if (isAuthenticated) {
