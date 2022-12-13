@@ -1,24 +1,50 @@
 import React from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
-import ForgotPassword from "../pages/auth/ForgotPassword";
-import Login from "../pages/auth/Login";
-import ResetPassword from "../pages/auth/ResetPassword";
+import { verifyCredential } from "../services/authenticate";
+import Dashboard from "../pages/admin/Dashboard";
 import PageNotFound from "../pages/error/PageNotFound";
-import Layout from "./Layout";
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import ResetPassword from "../pages/auth/ResetPassword";
+import Login from "../pages/auth/Login";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
     loader: () => {
-      return redirect("/auth");
+      return redirect("/admin");
     },
-    errorElement: <PageNotFound />,
+  },
+  {
+    path: "/admin",
+    loader: async () => {
+      const isAuthenticated = await verifyCredential();
+      if (!isAuthenticated) {
+        return redirect("/auth");
+      }
+      return null;
+    },
+    children: [
+      {
+        path: "",
+        loader: () => {
+          return redirect("dashboard");
+        },
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+    ],
   },
   {
     path: "/auth",
-    element: <Layout />,
-    errorElement: <PageNotFound />,
+    loader: async () => {
+      const isAuthenticated = await verifyCredential();
+      if (isAuthenticated) {
+        return redirect("/admin");
+      }
+      return null;
+    },
     children: [
       {
         path: "",

@@ -20,7 +20,6 @@ function Layout() {
           </ul>
         </nav>
       </div>
-      <div id="detail"></div>
     </>
   );
 }
