@@ -20,6 +20,8 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminLayout></AdminLayout>,
     loader: async () => {
+      // This only for quick demo, will be refactored and removed once API is completed
+      // we will have a better way to create route guards
       const isAuthenticated = await verifyCredential();
       if (!isAuthenticated) {
         return redirect("/auth");
@@ -43,6 +45,8 @@ export const router = createBrowserRouter([
     path: "/auth",
     element: <AuthLayout></AuthLayout>,
     loader: async () => {
+      // This only for quick demo, will be refactored and removed once API is completed
+      // we will have a better way to create route guards
       const isAuthenticated = await verifyCredential();
       if (isAuthenticated) {
         return redirect("/admin");
