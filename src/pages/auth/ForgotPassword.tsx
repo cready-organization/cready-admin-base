@@ -26,8 +26,11 @@ function ForgotPassword() {
         >
           Reset password
         </button>
-        <Link className="text-gray-500" to={"/auth/login"}>
+        <Link className="text-gray-500 inline-block" to={"/auth/login"}>
           Do you already have an account? Sign in
+        </Link>
+        <Link className="text-gray-500 mt-6 inline-block" to={"/auth/reset-password"}>
+          Go to preview Reset password page (This line will be removed on PROD)
         </Link>
       </div>
     </form>
