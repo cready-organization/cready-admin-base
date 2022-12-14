@@ -1,0 +1,10 @@
+.App[data-theme='dark'] {
+    --body-bg: #15181a;
+    --text-color: #afafaf;
+}
+
+
+.App[data-theme='light'] {
+    --body-bg: #fafafa;
+    --text-color: #999999;
+}

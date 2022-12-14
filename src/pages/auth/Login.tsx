@@ -1,9 +1,18 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import { Button, Textarea, TextField } from "../../components";
-import { TEXTFIELD_TYPE } from "../../helpers/app-enum";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Textarea, TextField } from "src/components";
+import { TEXTFIELD_TYPE } from "src/helpers/app-enum";
+import { useCheckAuthentication } from "src/Hook/useCheckAuthentication";
 
 function Login() {
+  const isAuthenticated = useCheckAuthentication();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+  }, [isAuthenticated]);
   return (
     <div className="login-form">
       <p className="mb-4">Please login to your account</p>

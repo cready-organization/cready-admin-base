@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 function AdminLayout() {
-  let activeStyle = {
+  const activeStyle = {
     textDecoration: "underline",
     color: "red",
   };

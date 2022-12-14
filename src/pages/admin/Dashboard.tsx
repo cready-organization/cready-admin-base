@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Badge, Button, Textarea, TextField } from "../../components";
-import { TEXTFIELD_TYPE } from "../../helpers/app-enum";
+import { Badge, Button, Textarea, TextField } from "src/components";
+import { TEXTFIELD_TYPE } from "src/helpers/app-enum";
 
 function Dashboard() {
   return (
