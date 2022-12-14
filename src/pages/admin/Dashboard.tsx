@@ -1,7 +1,34 @@
-import React from "react";
+import * as React from "react";
+import { Badge, Button, Textarea, TextField } from "../../components";
+import { TEXTFIELD_TYPE } from "../../helpers/app-enum";
 
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <div className="mb-4">
+        <TextField
+          placeholder="Username"
+          type={TEXTFIELD_TYPE.TEXT}
+          label="Input Textfield"
+        />
+      </div>
+      <div className="mb-4">
+        <Textarea placeholder="Textarea content" label="Textarea" />
+      </div>
+      <div className="mb-4">
+        <Button fullWidth={false}>Button</Button>
+      </div>
+      <div className="mb-4">
+        <Badge
+          onClose={(e) => {
+            console.log(e);
+          }}
+        >
+          Badge
+        </Badge>
+      </div>
+    </>
+  );
 }
 
 export default Dashboard;

@@ -1,6 +1,5 @@
-import React from "react";
+import * as React from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
-import { verifyCredential } from "../services/authenticate";
 import Dashboard from "../pages/admin/Dashboard";
 import PageNotFound from "../pages/error/PageNotFound";
 import ForgotPassword from "../pages/auth/ForgotPassword";
@@ -19,15 +18,6 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminLayout></AdminLayout>,
-    loader: async () => {
-      // This only for quick demo, will be refactored and removed once API is completed
-      // we will have a better way to create route guards
-      const isAuthenticated = await verifyCredential();
-      if (!isAuthenticated) {
-        return redirect("/auth");
-      }
-      return null;
-    },
     children: [
       {
         path: "",
@@ -44,15 +34,6 @@ export const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthLayout></AuthLayout>,
-    loader: async () => {
-      // This only for quick demo, will be refactored and removed once API is completed
-      // we will have a better way to create route guards
-      const isAuthenticated = await verifyCredential();
-      if (isAuthenticated) {
-        return redirect("/admin");
-      }
-      return null;
-    },
     children: [
       {
         path: "",

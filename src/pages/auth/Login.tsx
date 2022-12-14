@@ -1,44 +1,27 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { Button, Textarea, TextField } from "../../components";
+import { TEXTFIELD_TYPE } from "../../helpers/app-enum";
 
 function Login() {
   return (
-    <form>
+    <div className="login-form">
       <p className="mb-4">Please login to your account</p>
       <div className="mb-4">
-        <input
-          type="text"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          id="exampleFormControlInput1"
-          placeholder="Username"
-        />
+        <TextField placeholder="Username" type={TEXTFIELD_TYPE.TEXT} />
       </div>
       <div className="mb-4">
-        <input
-          type="password"
-          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          id="exampleFormControlInput1"
-          placeholder="Password"
-        />
+        <TextField placeholder="Password" type={TEXTFIELD_TYPE.PASSWORD} />
+      </div>
+      <div className="mb-2">
+        <Button fullWidth={true}>Log in</Button>
       </div>
       <div className="text-center pt-1 mb-12 pb-1">
-        <button
-          className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-          type="button"
-          data-mdb-ripple="true"
-          data-mdb-ripple-color="light"
-          style={{
-            background:
-              "linear-gradient(to right,#ee7724,#d8363a,#dd3675,#b44593)",
-          }}
-        >
-          Log in
-        </button>
         <Link className="text-gray-500" to={"/auth/forgot-password"}>
           Forgot password?
         </Link>
       </div>
-    </form>
+    </div>
   );
 }
 
