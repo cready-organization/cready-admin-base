@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TEXTFIELD_TYPE } from "../../../helpers/app-enum";
-import { IInputCommonProps } from "../../../helpers/app-interface";
+import { TEXTFIELD_TYPE } from "src/helpers/app-enum";
+import { IInputCommonProps } from "src/helpers/app-interface";
 
 interface ITextFieldProps extends React.PropsWithChildren, IInputCommonProps {
   type?: TEXTFIELD_TYPE;

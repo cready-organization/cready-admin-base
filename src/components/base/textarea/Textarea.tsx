@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
-import { IInputCommonProps } from "../../../helpers/app-interface";
+import { IInputCommonProps } from "src/helpers/app-interface";
 
 interface ITextareaProps extends React.PropsWithChildren, IInputCommonProps {
   prefix?: React.ReactNode;
@@ -25,7 +25,7 @@ function Textarea(props: ITextareaProps) {
   const wrapperClass = classNames(wrapperClassName);
   const inputClass = classNames(
     "w-full p-2.5 p-x-4 bg-transparent outline-none min-h-[100px]",
-    inputClassName
+    inputClassName,
   );
 
   return (
