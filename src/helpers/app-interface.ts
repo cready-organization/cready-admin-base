@@ -6,4 +6,5 @@ export interface IInputCommonProps {
   onFocus?: (e: React.SyntheticEvent) => void;
   onBlur?: (e: React.SyntheticEvent) => void;
   onChange?: (e: React.SyntheticEvent) => void;
+  onClickUnit?: (e: React.SyntheticEvent) => void;
 }
