@@ -13,3 +13,23 @@ import background12 from 'src/assets/images/background/background-base-12.png';
 import background13 from 'src/assets/images/background/background-base-13.png';
 import background14 from 'src/assets/images/background/background-base-14.png';
 import background15 from 'src/assets/images/background/background-base-15.png';
+
+const backgroundList = [
+    background1,
+    background2,
+    background3,
+    background4,
+    background5,
+    background6,
+    background7,
+    background8,
+    background9,
+    background10,
+    background11,
+    background12,
+    background13,
+    background14,
+    background15,
+];
+
+export default backgroundList;
