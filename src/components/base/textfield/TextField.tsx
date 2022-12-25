@@ -1,6 +1,6 @@
 import * as React from "react";
-import { TEXTFIELD_TYPE } from "src/helpers/app-enum";
-import { IInputCommonProps } from "src/helpers/app-interface";
+import { TEXTFIELD_TYPE } from "src/ultil/enum/app-enum";
+import { IInputCommonProps } from "src/ultil/enum/app-interface";
 
 interface ITextFieldProps extends React.PropsWithChildren, IInputCommonProps {
   type?: TEXTFIELD_TYPE;
@@ -18,7 +18,7 @@ function TextField(props: ITextFieldProps) {
     type,
     placeholder,
     wrapperClassName = "",
-    labelClassName ="",
+    labelClassName = "",
     inputClassName = "",
     error,
     unit,
@@ -31,7 +31,11 @@ function TextField(props: ITextFieldProps) {
 
   return (
     <div className={wrapperClassName}>
-      {label && <label className={`block pb-1.5 text-gray-500 ${labelClassName}`}>{label}</label>}
+      {label && (
+        <label className={`block pb-1.5 text-gray-500 ${labelClassName}`}>
+          {label}
+        </label>
+      )}
       {/*text-gray-400 border rounded-md focus-within:outline focus-within:outline-indigo-200 */}
       <div className="flex items-center border border-solid border-input-border-color rounded-default outline-0 ">
         {prefix && (
@@ -49,7 +53,10 @@ function TextField(props: ITextFieldProps) {
           onChange={onChange}
         />
         {unit && (
-          <div className="px-3 py-2 h-10 cursor-pointer select-none" onClick={onClickUnit}>
+          <div
+            className="px-3 py-2 h-10 cursor-pointer select-none"
+            onClick={onClickUnit}
+          >
             {unit}
           </div>
         )}

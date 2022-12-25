@@ -21,8 +21,6 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     // "types": ["@emotion/core"],
-    "paths": {
-      "@/*":["./src/*"]
-    }
+   
   }
 }

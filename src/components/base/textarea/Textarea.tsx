@@ -1,6 +1,6 @@
-import classNames from "classnames";
 import * as React from "react";
-import { IInputCommonProps } from "src/helpers/app-interface";
+import classNames from "classnames";
+import { IInputCommonProps } from "src/ultil/enum/app-interface";
 
 interface ITextareaProps extends React.PropsWithChildren, IInputCommonProps {
   prefix?: React.ReactNode;

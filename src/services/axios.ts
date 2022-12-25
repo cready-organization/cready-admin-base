@@ -8,12 +8,14 @@ const axiosClient = axios.create({
   },
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 axiosClient.interceptors.request.use((config: any) => {
   config.headers["withCredentials"] = true;
   return config;
 });
 
 axiosClient.interceptors.response.use(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (response: any) => {
     if (response.status === 200 && response.data) {
       return response.data;
@@ -21,6 +23,7 @@ axiosClient.interceptors.response.use(
 
     return response;
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ({ response }: any) => {
     if (response.status === 403 || response.status === 401) {
       localStorage.clear();
@@ -28,6 +31,6 @@ axiosClient.interceptors.response.use(
       cookies.remove("role");
       cookies.remove("accessToken");
     }
-  }
+  },
 );
 export default axiosClient;

@@ -5,7 +5,7 @@ export const globalSlice = createSlice({
   name: "global",
   initialState: {
     theme: loadState("theme") || "dark",
-    language: loadState("language") || "NO",
+    language: loadState("language") || "EN",
   },
   reducers: {
     changeTheme(state, action) {
