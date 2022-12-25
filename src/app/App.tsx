@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DefaultLayout from "src/core/layout/Default";
+import DefaultLayout from "src/core/layouts/Default";
 import PrivateRoute from "./PrivateRoute";
 
 const LoginPage = lazy(() => import("src/pages/auth/Login"));

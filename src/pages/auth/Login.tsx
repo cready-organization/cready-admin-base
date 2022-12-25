@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { TEXTFIELD_TYPE } from "src/ultil/enum/app-enum";
 import databaseImg from "src/assets/images/database.png";
-import LayoutLogin from "src/layouts/login/LayoutLogin";
+import LayoutLogin from "src/core/layouts/auth/LayoutLogin";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
