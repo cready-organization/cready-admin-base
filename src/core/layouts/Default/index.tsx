@@ -14,16 +14,16 @@ export default function DefaultLayout() {
   }
   return (
     <div className="app-layout">
-      <div className="app-header">
+      {/* <div className="app-header">
         <DefaultHeader />
-      </div>
+      </div> */}
 
       <div className="app-body ">
         <Content />
       </div>
-      <footer className="app-footer">
+      {/* <footer className="app-footer">
         <DefaultFooter />
-      </footer>
+      </footer> */}
     </div>
   );
 }

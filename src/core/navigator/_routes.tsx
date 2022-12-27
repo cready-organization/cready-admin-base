@@ -1,6 +1,9 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
+
+import Login from 'src/pages/auth/Login';
 const Dashboard = lazy(() => import("src/pages/admin/Dashboard"));
+
 const routes = [
   {
     key: "home",
@@ -15,6 +18,13 @@ const routes = [
     name: "Dashboard",
     component: <Dashboard />,
     roles: ["planner", "admin", "user"],
+  },
+  {
+    key: "login-database",
+    path: "/database/login",
+    name: "LoginDatabase",
+    component: <Login />,
+    roles: ["planner", "admin"],
   },
 ];
 export default routes;

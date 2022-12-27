@@ -16,6 +16,9 @@
   --tw-content: "";
 }
 
+/* Import font Poppins (font-weight: 200, 300, 400, 500, 600, 700, italic: 0) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
 /*
 1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -418,6 +421,3 @@ Ensure the default browser behavior of the `hidden` attribute.
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import font Poppins (font-weight: 200, 300, 400, 500, 600, 700, italic: 0) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
