@@ -26,13 +26,15 @@ function LayoutLogin({children}: PropsWithChildren) {
     }, []);
 
     return (
-        <div style={{backgroundImage: `url('${backgroundList[indexBackground]}')`}} className={`h-[100vh] w-[100vw] overflow-hidden bg-cover bg-[center_center] relative p-8 sm:p-[70px] after:content-[''] after:absolute after:bg-overlay-color after:top-0 after:bottom-0 after:left-0 after:right-0 after:pointer-events-none `}>
+        <div style={{backgroundImage: `url('${backgroundList[indexBackground]}')`}} className={`h-[100vh] w-[100vw] overflow-hidden bg-cover relative p-8 sm:p-[70px] after:content-[''] after:absolute after:bg-overlay-color after:top-0 after:bottom-0 after:left-0 after:right-0 after:pointer-events-none `}>
             <div className="grid gap-5 lg:gap-[100px] xl:grid-cols-2 h-full z-10 relative">
                 <div className='flex justify-center items-center'>
                     <img className="block max-w-[150px] xs:max-w-[370px] w-full" src={logoCready}/>
                 </div>
-                <div className=' flex flex-col items-center bg-[#fff] rounded-[20px] p-4 xs:pb-0 xs:px-[100px] '>
-                    {children}
+                <div className='w-full flex justify-center'>
+                    <div className="w-full max-w-[600px] h-full flex flex-col items-center bg-[#fff] rounded-[20px] pt-[9%] px-4 pb-4 xs:pb-0 xs:px-[100px] ">
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>);

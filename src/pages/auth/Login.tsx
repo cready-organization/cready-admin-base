@@ -33,6 +33,8 @@ function Login() {
     });
   };
 
+
+
   // VALIDATION
 
   interface YupSchema {
@@ -94,11 +96,8 @@ function Login() {
 
   return (
     <LayoutLogin>
-      <div className="w-[86px] h-[86px] mt-2 rounded-full bg-[#F9F9F9] flex md:w-40 md:h-40 lg:w-[220px] lg:h-[220px] lg:mt-[92px]">
-        <img
-          className="m-auto w-10 h-10 md:w-20 md:h-20 lg:w-[100px] lg:h-[100px]"
-          src={databaseImg}
-        />
+      <div className="rounded-full bg-[#F9F9F9] flex  w-[36.666%] pt-[36.666%] relative">
+        <div style={{backgroundImage: `url('${databaseImg}')`}} className="m-auto w-[45.454545%] pt-[45.454545%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-cover bg-[center_center]" ></div>
       </div>
       <h3 className="text-main-color font-medium text-base mt-2 lg:mt-9 lg:text-[1.75rem] lg:leading-[2.625rem] ">
         Login to Mange Database
@@ -138,7 +137,7 @@ function Login() {
         </div>
       </div>
       <div>
-        <Button onClick={handleUserLogin} customClassName="mt-6 w-[87px] h-10 flex flex-direction justify-center items-center bg-button-main-color rounded-default">
+        <Button onClick={handleUserLogin} customClassName="mt-6 w-[87px] h-10 flex flex-direction justify-center items-center bg-button-main-color">
           <span className="font-medium text-base text-white">Login</span>
         </Button>
       </div>
