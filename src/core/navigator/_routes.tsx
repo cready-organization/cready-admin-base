@@ -19,12 +19,5 @@ const routes = [
     component: <Dashboard />,
     roles: ["planner", "admin", "user"],
   },
-  {
-    key: "login-database",
-    path: "/database/login",
-    name: "LoginDatabase",
-    component: <Login />,
-    roles: ["planner", "admin"],
-  },
 ];
 export default routes;

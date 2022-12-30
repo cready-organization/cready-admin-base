@@ -94,19 +94,18 @@ function Login() {
 
   return (
     <LayoutLogin>
-      <div className="w-[86px] h-24 mt-6 rounded-full bg-[#F9F9F9] flex md:w-40 md:h-40 lg:w-[220px] lg:h-[220px] lg:mt-[92px]">
+      <div className="w-[86px] h-[86px] mt-2 rounded-full bg-[#F9F9F9] flex md:w-40 md:h-40 lg:w-[220px] lg:h-[220px] lg:mt-[92px]">
         <img
-          className="m-auto w-10 h-[40px] md:w-20 md:h-20 lg:w-[100px] lg:h-[100px]"
+          className="m-auto w-10 h-10 md:w-20 md:h-20 lg:w-[100px] lg:h-[100px]"
           src={databaseImg}
         />
       </div>
       <h3 className="text-main-color font-medium text-base mt-2 lg:mt-9 lg:text-[1.75rem] lg:leading-[2.625rem] ">
         Login to Mange Database
       </h3>
-      <div>
+      <div className="w-full">
         <div className="mt-12 lg:mt-[42px]">
           <TextField
-            wrapperClassName="w-[294px] lg:w-[400px]"
             inputClassName={inputClassName}
             label="User Master"
             labelClassName={labelClassName}
@@ -122,14 +121,13 @@ function Login() {
         </div>
         <div className="mt-6">
           <TextField
-            wrapperClassName="w-[294px] lg:w-[400px]"
             inputClassName={inputClassName}
             label="Master Password"
             labelClassName={labelClassName}
             type={showPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
             value={inputData.password}
             onChange={onChangePassword}
-            unit={showPassword ? "hide" : "show"}
+            unit={showPassword ? 'hide' : 'show'}
             onClickUnit={onClickUnit}
             onFocus={() => setErrorMessage({
               ...errorMessage,
@@ -144,7 +142,7 @@ function Login() {
           <span className="font-medium text-base text-white">Login</span>
         </Button>
       </div>
-      <div className="mt-14 mb-4 lg:mt-[185px] lg:mb-6">
+      <div className="mt-auto mb-0 xs:mb-6">
         <span className="font-normal text-sm text-blur-color ">
           Go back to{" "}
           <Link className="font-normal text-sm text-[#0469E3]" to={"/login"}>

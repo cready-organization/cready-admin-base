@@ -26,12 +26,12 @@ function LayoutLogin({children}: PropsWithChildren) {
     }, []);
 
     return (
-        <div style={{backgroundImage: `url('${backgroundList[indexBackground]}')`}} className={`h-[100vh] w-[100vw]`}>
-            <div className="h-full w-full bg-overlay-color flex flex-col lg:justify-center items-center lg:flex-row">
-                <div className='flex pt-14 md:w-80 md:pt-32 lg:w-[380px] lg:h-[884px] xl:w-[450px] 2xl:w-[600px]'>
-                    <img className="block w-[150px] h-10 object-contain mx-auto md:w-80 md:h-20 lg:m-auto lg:w-[370px] lg:h-24 " src={logoCready}/>
+        <div style={{backgroundImage: `url('${backgroundList[indexBackground]}')`}} className={`h-[100vh] w-[100vw] overflow-hidden bg-cover bg-[center_center] relative p-8 sm:p-[70px] after:content-[''] after:absolute after:bg-overlay-color after:top-0 after:bottom-0 after:left-0 after:right-0 after:pointer-events-none `}>
+            <div className="grid gap-5 lg:gap-[100px] xl:grid-cols-2 h-full z-10 relative">
+                <div className='flex justify-center items-center'>
+                    <img className="block max-w-[150px] xs:max-w-[370px] w-full" src={logoCready}/>
                 </div>
-                <div className='w-[326px] h-[505px] mt-20 flex flex-col items-center bg-[#fff] rounded-[20px] md:w-[450px] md:h-[600px] lg:mt-0 lg:w-[550px] lg:h-[884px] lg:ml-12 xl:w-[600px] xl:ml-[100px]'>
+                <div className=' flex flex-col items-center bg-[#fff] rounded-[20px] p-4 xs:pb-0 xs:px-[100px] '>
                     {children}
                 </div>
             </div>
