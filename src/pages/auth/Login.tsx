@@ -92,14 +92,14 @@ function Login() {
 
   // define class name for TextField
   const labelClassName = "font-normal text-sm text-blur-color";
-  const inputClassName = " font-normal text-sm text-text-main-color";
+  const inputClassName = " font-normal text-sm text-text-color";
 
   return (
     <LayoutLogin>
       <div className="rounded-full bg-[#F9F9F9] flex  w-[36.666%] pt-[36.666%] relative">
-        <div style={{backgroundImage: `url('${databaseImg}')`}} className="m-auto w-[45.454545%] pt-[45.454545%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-cover bg-[center_center]" ></div>
+        <div style={{backgroundImage: `url('${databaseImg}')`}} className="m-auto w-[45.454545%] pt-[45.454545%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-cover" ></div>
       </div>
-      <h3 className="text-main-color font-medium text-base mt-2 lg:mt-9 lg:text-[1.75rem] lg:leading-[2.625rem] ">
+      <h3 className="text-text-color text-center font-medium text-base mt-2 lg:mt-9 lg:text-[1.75rem] lg:leading-[2.625rem] ">
         Login to Mange Database
       </h3>
       <div className="w-full">
@@ -137,7 +137,7 @@ function Login() {
         </div>
       </div>
       <div>
-        <Button onClick={handleUserLogin} customClassName="mt-6 w-[87px] h-10 flex flex-direction justify-center items-center bg-button-main-color">
+        <Button onClick={handleUserLogin} customClassName="mt-6 w-[87px] h-10 flex flex-direction justify-center items-center">
           <span className="font-medium text-base text-white">Login</span>
         </Button>
       </div>
