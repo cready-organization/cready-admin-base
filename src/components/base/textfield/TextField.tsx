@@ -34,12 +34,12 @@ function TextField(props: ITextFieldProps) {
   return (
     <div className={wrapperClassName}>
       {label && (
-        <label className={`block pb-1.5 text-gray-500 ${error ? 'text-red-500' : ''} ${labelClassName}`}>
+        <label className={`block pb-1.5 text-gray-500 ${error ? 'text-orange-color' : ''} ${labelClassName}`}>
           {label}
         </label>
       )}
       {/*text-gray-400 border rounded-md focus-within:outline focus-within:outline-indigo-200 */}
-      <div className={`flex items-center border border-solid border-input-border-color rounded-default outline-0  ${error ? 'border-red-500 text-red-500' : ''}`}>
+      <div className={`flex items-center border border-solid border-input-border-color rounded-default outline-0  ${error ? 'border-orange-color text-orange-color' : ''}`}>
         {prefix && (
           <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r h-10 ">
             {prefix}
@@ -67,7 +67,7 @@ function TextField(props: ITextFieldProps) {
 
       {error && (
         <div className="text-right">
-          <span className="text-red-500">{error}</span>
+          <span className="text-orange-color">{error}</span>
         </div>
       )}
     </div>

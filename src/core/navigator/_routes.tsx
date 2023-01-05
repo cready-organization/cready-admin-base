@@ -1,7 +1,6 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-import Login from 'src/pages/auth/Login';
 const Dashboard = lazy(() => import("src/pages/admin/Dashboard"));
 
 const routes = [

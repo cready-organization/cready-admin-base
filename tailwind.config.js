@@ -10,8 +10,9 @@ module.exports = {
       colors: {
         'primary-color': '#0469E3',
         'text-color': '#3F434A',
+        'body-light-color': '#8A9099',
+        'orange-color': '#FF965D',
         'overlay-color': 'rgba(0, 0, 0, 0.5)',
-        'blur-color': '#8A9099',
         'input-border-color': '#C4C4C4',
       },
       borderRadius: {

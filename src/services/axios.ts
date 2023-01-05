@@ -2,7 +2,10 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 
+const BASE_URL = 'http://localhost:4000';
+
 const axiosClient = axios.create({
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": `application/json`,
   },
@@ -30,7 +33,11 @@ axiosClient.interceptors.response.use(
       cookies.remove("username");
       cookies.remove("role");
       cookies.remove("accessToken");
+    } else {
+      return Promise.reject(response);
     }
+    
   },
+
 );
 export default axiosClient;

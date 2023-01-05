@@ -1,13 +1,24 @@
-import { useState, SetStateAction } from "react";
+import { useState, SetStateAction, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { Button, Textarea, TextField } from "src/components";
 import { Link } from "react-router-dom";
 import * as yup from 'yup';
 
 import { TEXTFIELD_TYPE } from "src/ultil/enum/app-enum";
-import databaseImg from "src/assets/images/database.png";
+import databaseImg from "src/assets/images/auth/database.png";
+import adminImg from "src/assets/images/auth/web-analysis.png";
 import LayoutLogin from "src/core/layouts/auth/LayoutLogin";
+import axiosClient from "src/services/axios";
+
 
 function Login() {
+  const location = useLocation();
+  let isLoginDatabase = false;
+  if (location.pathname === '/database/login') {
+    isLoginDatabase = true;
+  }
+  
+  
   const [showPassword, setShowPassword] = useState(false);
 
   const [inputData, setInputData] = useState({
@@ -85,23 +96,38 @@ function Login() {
   };
 
   // user submit
-  const handleUserLogin = () => {
-    const data = handleValidation();
-    console.log('[fetch data]', data);
+  interface IPostCustom {
+    accessToken: string,
+  }
+  const handleUserLogin = async () => {
+    try {
+      const data = await handleValidation();
+      if (data) {
+        const response: IPostCustom = await axiosClient.post('/login', data);
+        console.log('[TOKEN]', response.accessToken);
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   // define class name for TextField
-  const labelClassName = "font-normal text-sm text-blur-color";
+  const labelClassName = "font-normal text-sm text-body-light-color";
   const inputClassName = " font-normal text-sm text-text-color";
 
   return (
     <LayoutLogin>
+      {/* <i className="fi fi-rr-eye-crossed"></i> */}
+      {/* Images */}
       <div className="rounded-full bg-[#F9F9F9] flex  w-[36.666%] pt-[36.666%] relative">
-        <div style={{backgroundImage: `url('${databaseImg}')`}} className="m-auto w-[45.454545%] pt-[45.454545%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-cover" ></div>
+        <div style={{backgroundImage: `url('${isLoginDatabase ? databaseImg : adminImg}')`}} className="m-auto w-[45.454545%] pt-[45.454545%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-cover" ></div>
       </div>
+      {/* Text */}
       <h3 className="text-text-color text-center font-medium text-base mt-2 lg:mt-9 lg:text-[1.75rem] lg:leading-[2.625rem] ">
-        Login to Mange Database
+        {isLoginDatabase ? 'Login to Mange Database' : 'Welcome Back!'}
       </h3>
+      {/* Fields */}
       <div className="w-full">
         <div className="mt-12 lg:mt-[42px]">
           <TextField
@@ -136,19 +162,31 @@ function Login() {
           />
         </div>
       </div>
-      <div>
-        <Button onClick={handleUserLogin} customClassName="mt-6 w-[87px] h-10 flex flex-direction justify-center items-center">
+      {/* Forgot password */}
+      { !isLoginDatabase && (
+        <div className="w-full mt-3 text-right">
+          <span className="font-normal text-sm text-body-light-color">Forgot password?</span>
+        </div>
+      )}
+      {/* Button */}
+      <div className="w-full">
+        <Button fullWidth onClick={handleUserLogin} customClassName={ (isLoginDatabase? "mt-6 mb-[16px]" : "mt-8 mb-[52px]") + " h-10 flex flex-direction justify-center items-center" }>
           <span className="font-medium text-base text-white">Login</span>
         </Button>
       </div>
-      <div className="mt-auto mb-0 xs:mb-6">
-        <span className="font-normal text-sm text-blur-color ">
-          Go back to{" "}
-          <Link className="font-normal text-sm text-[#0469E3]" to={"/login"}>
-            Login to Admin
-          </Link>
-        </span>
-      </div>
+      {/* Back Login to Admin */}
+      {
+        isLoginDatabase && (
+          <div className="mt-auto mb-0 xs:mb-6">
+            <span className="font-normal text-sm text-body-light-color">
+              Go back to{" "}
+              <Link className="font-normal text-sm text-[#0469E3]" to={"/login"}>
+                Login to Admin
+              </Link>
+            </span>
+          </div>
+        )
+      }
     </LayoutLogin>
   );
 }

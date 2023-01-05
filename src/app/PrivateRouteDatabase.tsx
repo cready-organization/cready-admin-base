@@ -5,6 +5,7 @@ import { useCheckAuthentication } from "src/Hook/useCheckAuthentication";
 function PrivateRouteDatabase({ children }: { children: ReactElement }) {
   const location = useLocation();
   const isAuthenticated = useCheckAuthentication();
+  
   if (!isAuthenticated) {
     return <Navigate to="/database/login" state={{ from: location }} replace />;
   }
