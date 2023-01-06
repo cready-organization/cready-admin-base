@@ -1,8 +1,8 @@
 import { useState, SetStateAction, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
 import { Button, Textarea, TextField } from "src/components";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as yup from 'yup';
+import { Cookies } from 'react-cookie';
 
 import { TEXTFIELD_TYPE } from "src/ultil/enum/app-enum";
 import databaseImg from "src/assets/images/auth/database.png";
@@ -10,6 +10,7 @@ import adminImg from "src/assets/images/auth/web-analysis.png";
 import LayoutLogin from "src/core/layouts/auth/LayoutLogin";
 import axiosClient from "src/services/axios";
 
+const cookies = new Cookies();
 
 function Login() {
   const location = useLocation();
@@ -99,16 +100,19 @@ function Login() {
   interface IPostCustom {
     accessToken: string,
   }
+  const navigate = useNavigate();
+
   const handleUserLogin = async () => {
     try {
       const data = await handleValidation();
       if (data) {
         const response: IPostCustom = await axiosClient.post('/login', data);
-        console.log('[TOKEN]', response.accessToken);
+        cookies.set('accessToken', response.accessToken, {path: '/'});
+        if (response.accessToken) navigate(isLoginDatabase ? '/database/dashboard' : '/dashboard', { replace: true });
       }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log(error);
+      console.error(error.data.errorMessage);
     }
   };
 

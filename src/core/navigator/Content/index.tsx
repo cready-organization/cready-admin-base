@@ -10,6 +10,7 @@ function Content() {
           return <Route key={key} path={path} element={component} />;
         })}
         <Route path="/" element={<Navigate replace to="/dashboard" />} />
+        <Route path="/database" element={<Navigate replace to="/database/dashboard" />} />
       </Routes>
     </Suspense>
   );
