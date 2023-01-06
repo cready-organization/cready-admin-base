@@ -2,7 +2,7 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = 'https://cready-json-server.onrender.com';
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,

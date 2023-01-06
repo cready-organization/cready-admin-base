@@ -11,6 +11,7 @@ module.exports = {
         'primary-color': '#0469E3',
         'text-color': '#3F434A',
         'body-light-color': '#8A9099',
+        'dark-red-color': '#F05C54',
         'orange-color': '#FF965D',
         'overlay-color': 'rgba(0, 0, 0, 0.5)',
         'input-border-color': '#C4C4C4',
@@ -19,6 +20,7 @@ module.exports = {
         default: '14px',
       },
       screens: {
+        xxs: '375px',
         xs: '575px',
       }
     },

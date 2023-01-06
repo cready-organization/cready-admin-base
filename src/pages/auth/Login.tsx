@@ -1,4 +1,4 @@
-import { useState, SetStateAction, useEffect } from "react";
+import { useState  } from "react";
 import { Button, Textarea, TextField } from "src/components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as yup from 'yup';
@@ -36,6 +36,11 @@ function Login() {
       ...inputData,
       username: e.currentTarget.value
     });
+    setErrorMessage({
+      ...errorMessage,
+      username: '',
+    });
+    setErrorResponse('');
   };
 
   const onChangePassword = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -43,6 +48,11 @@ function Login() {
       ...inputData,
       password: e.currentTarget.value
     });
+    setErrorMessage({
+      ...errorMessage,
+      password: '',
+    });
+    setErrorResponse('');
   };
 
 
@@ -71,8 +81,8 @@ function Login() {
 
   // define yup validation
   const userSchema: yup.SchemaOf<YupSchema> = yup.object({
-    username: yup.string().required(handleErrorMsg('username', 'username is a required field')),
-    password: yup.string().required(handleErrorMsg('password', 'password is a required field')),
+    username: yup.string().required(handleErrorMsg('username', 'Please enter an email address.')),
+    password: yup.string().required(handleErrorMsg('password', 'Please enter an password.')),
   });
 
   // handle yup validation
@@ -100,6 +110,8 @@ function Login() {
   interface IPostCustom {
     accessToken: string,
   }
+  const [errorResponse, setErrorResponse] = useState('');
+
   const navigate = useNavigate();
 
   const handleUserLogin = async () => {
@@ -112,7 +124,13 @@ function Login() {
       }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error(error.data.errorMessage);
+      setErrorResponse(error.data.errorMessage);
+    }
+  };
+
+  const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key === 'Enter') {
+      handleUserLogin();
     }
   };
 
@@ -132,7 +150,7 @@ function Login() {
         {isLoginDatabase ? 'Login to Mange Database' : 'Welcome Back!'}
       </h3>
       {/* Fields */}
-      <div className="w-full">
+      <div className="w-full" onKeyDown={handleKeyDown}>
         <div className="mt-12 lg:mt-[42px]">
           <TextField
             inputClassName={inputClassName}
@@ -172,9 +190,14 @@ function Login() {
           <span className="font-normal text-sm text-body-light-color">Forgot password?</span>
         </div>
       )}
+      {/* Error message Form */}
+      {errorResponse && 
+        <div className="w-full mt-2 xxs:mt-6">
+          <span className="font-normal text-base text-dark-red-color">{errorResponse}</span>
+        </div>}
       {/* Button */}
       <div className="w-full">
-        <Button fullWidth onClick={handleUserLogin} customClassName={ (isLoginDatabase? "mt-6 mb-[16px]" : "mt-8 mb-[52px]") + " h-10 flex flex-direction justify-center items-center" }>
+        <Button fullWidth onClick={handleUserLogin} customClassName={ (isLoginDatabase? "mt-6 mb-[16px]" : "mb-[52px] mt-2 xxs:mt-8") + " h-10 flex flex-direction justify-center items-center" }>
           <span className="font-medium text-base text-white">Login</span>
         </Button>
       </div>
