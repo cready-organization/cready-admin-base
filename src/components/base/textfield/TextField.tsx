@@ -9,6 +9,7 @@ interface ITextFieldProps extends IInputCommonProps<HTMLInputElement> {
   labelClassName?: string;
   inputClassName?: string;
   unit?: string;
+  autoFocus?: boolean;
   onClickUnit?: (e: React.SyntheticEvent) => void;
 }
 
@@ -25,6 +26,7 @@ function TextField(props: ITextFieldProps) {
     error,
     unit,
     disabled,
+    autoFocus,
     onFocus,
     onBlur,
     onChange,
@@ -39,7 +41,7 @@ function TextField(props: ITextFieldProps) {
         </label>
       )}
       {/*text-gray-400 border rounded-md focus-within:outline focus-within:outline-indigo-200 */}
-      <div className={`flex items-center border border-solid border-input-border-color rounded-default outline-0  ${error ? 'border-orange-color text-orange-color' : ''}`}>
+      <div className={`flex items-center border border-solid border-input-border-color rounded-default outline-0 focus-within:border-primary-color  ${error ? 'border-orange-color text-orange-color' : ''}`}>
         {prefix && (
           <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r h-10 ">
             {prefix}
@@ -54,6 +56,7 @@ function TextField(props: ITextFieldProps) {
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}
+          autoFocus={autoFocus}
         />
         {unit && (
           <div

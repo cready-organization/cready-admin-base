@@ -1,31 +1,25 @@
 import * as React from "react";
-import { Badge, Button, Textarea, TextField } from "src/components";
-import { TEXTFIELD_TYPE } from "src/ultil/enum/app-enum";
+import {  Button } from "src/components";
+import { Cookies } from 'react-cookie';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+const cookies = new Cookies();
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname.includes('database') ? '/database/login' : '/login';
+
+  const handleLogout = () => {
+    cookies.remove('accessToken', {path: '/'});
+    navigate(path , {replace: true});
+  };
+
   return (
-    <div>
-      <div className="mb-4">
-        <TextField
-          placeholder="Username"
-          type={TEXTFIELD_TYPE.TEXT}
-          label="Input Textfield"
-        />
-      </div>
-      <div className="mb-4">
-        <Textarea placeholder="Textarea content" label="Textarea" />
-      </div>
-      <div className="mb-4">
-        <Button fullWidth={false}>Button</Button>
-      </div>
-      <div className="mb-4">
-        <Badge
-          onClose={(e) => {
-            console.log(e);
-          }}
-        >
-          Badge
-        </Badge>
+    <div className="h-[100vh] w-[100vw] flex">
+      <h1>Admin Dashboard</h1>
+      <div className="m-auto">
+        <Button onClick={handleLogout} fullWidth={false}>Logout</Button>
       </div>
     </div>
   );

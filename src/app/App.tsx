@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DefaultLayout from "src/core/layouts/Default";
 import PrivateRoute from "./PrivateRoute";
+import ControllerRoute from "./ControllerRoute";
 
 const LoginPage = lazy(() => import("src/pages/auth/Login"));
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<h1>Loading...</h1>}>
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<ControllerRoute><LoginPage /></ControllerRoute>} />
             <Route
               path="/*"
               element={
@@ -20,7 +21,7 @@ function App() {
               }
             />
             {/* Login database */}
-            <Route path="/database/login" element={<LoginPage />} />
+            <Route path="/database/login" element={<ControllerRoute><LoginPage /></ControllerRoute>} />
           </Routes>
         </Suspense>
       </BrowserRouter>
