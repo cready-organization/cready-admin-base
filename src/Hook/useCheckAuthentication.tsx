@@ -4,6 +4,6 @@ export const useCheckAuthentication = () => {
   const haveToken = cookies.get("accessToken")?.length > 0;
 
   const isAuthenticated = haveToken;
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   return isAuthenticated;
 };

@@ -1,4 +1,5 @@
 @import './variables';
+@import './flaticon/uicons/css/all/all.css';
 
 
 
@@ -7,7 +8,7 @@
     background-color: var(--body-bg);
     color: var(--text-color);
     overflow-x: hidden;
-
+    
     a:-webkit-any-link {
         color: var(--text-color);
         cursor: pointer;

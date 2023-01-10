@@ -16,6 +16,10 @@
   --tw-content: "";
 }
 
+/* Import font Poppins (font-weight: 200, 300, 400, 500, 600, 700, italic: 0) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
 /*
 1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -48,6 +52,8 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  font-family: 'Poppins', sans-serif;
+  /* 3 */
 }
 
 /*
