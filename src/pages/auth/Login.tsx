@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import * as React from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Textarea, TextField } from "src/components";
 import { TEXTFIELD_TYPE } from "src/helpers/app-enum";
@@ -19,6 +20,7 @@ function Login() {
       <div className="mb-4">
         <TextField placeholder="Username" type={TEXTFIELD_TYPE.TEXT} />
       </div>
+      <i className="fa-light fa-magnifying-glass"></i>
       <div className="mb-4">
         <TextField placeholder="Password" type={TEXTFIELD_TYPE.PASSWORD} />
       </div>
