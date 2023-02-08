@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Textarea, TextField } from "src/components";
 import { TEXTFIELD_TYPE } from "src/helpers/app-enum";
-import { useCheckAuthentication } from "src/Hook/useCheckAuthentication";
+import { useCheckAuthentication } from "src/hooks/useCheckAuthentication";
 
 function Login() {
   const isAuthenticated = useCheckAuthentication();
