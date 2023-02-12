@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useCheckAuthentication } from "src/Hook/useCheckAuthentication";
+import { useCheckAuthentication } from "src/hooks/useCheckAuthentication";
 
 import DefaultHeader from "src/core/navigator/DefaultHeader";
 import Content from "src/core/navigator/Content";

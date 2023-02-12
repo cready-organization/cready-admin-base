@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+packages/font-awesome-v6.2/svgs
 
 # testing
 /coverage

@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { Cookies } from 'react-cookie';
-
-import { Button, Textarea, TextField } from 'src/components';
+import { Button, TextField } from 'src/components';
 import { TEXTFIELD_TYPE } from 'src/ultil/enum/app-enum';
 import databaseImg from 'src/assets/images/auth/database.png';
 import adminImg from 'src/assets/images/auth/web-analysis.png';
@@ -13,6 +12,10 @@ import axiosClient from 'src/services/axios';
 const cookies = new Cookies();
 
 function Login() {
+    // define class name for TextField
+    const labelClassName = 'font-normal text-sm text-body-light-color';
+    const inputClassName = ' font-normal text-sm text-text-color';
+
     const location = useLocation();
     let isLoginDatabase = false;
     if (location.pathname === '/database/login') {
@@ -136,10 +139,6 @@ function Login() {
             handleUserLogin();
         }
     };
-
-    // define class name for TextField
-    const labelClassName = 'font-normal text-sm text-body-light-color';
-    const inputClassName = ' font-normal text-sm text-text-color';
 
     return (
         <LayoutLogin>
