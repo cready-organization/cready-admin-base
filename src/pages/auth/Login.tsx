@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button, Textarea, TextField } from 'src/components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { Cookies } from 'react-cookie';
 
+import { Button, Textarea, TextField } from 'src/components';
 import { TEXTFIELD_TYPE } from 'src/ultil/enum/app-enum';
 import databaseImg from 'src/assets/images/auth/database.png';
 import adminImg from 'src/assets/images/auth/web-analysis.png';
@@ -118,6 +118,7 @@ function Login() {
                 setIsLoading(true);
                 const response = await axiosClient.post('/user/login', data);
                 setIsLoading(false);
+
                 if (response.data) {
                     cookies.set('accessToken', response.data, { path: '/' });
                     navigate(isLoginDatabase ? '/database/dashboard' : '/dashboard', { replace: true });
@@ -142,7 +143,6 @@ function Login() {
 
     return (
         <LayoutLogin>
-            {/* <i className="fi fi-rr-eye-crossed"></i> */}
             {/* Images */}
             <div className="rounded-full bg-[#F9F9F9] flex  w-[36.666%] pt-[36.666%] relative">
                 <div
@@ -197,7 +197,9 @@ function Login() {
             {/* Forgot password */}
             {!isLoginDatabase && (
                 <div className="w-full mt-3 text-right">
-                    <span className="font-normal text-sm text-body-light-color">Forgot password?</span>
+                    <Link to={'/login/recover'} className="font-normal text-sm text-body-light-color">
+                        Forgot password?
+                    </Link>
                 </div>
             )}
             {/* Error message Form */}
