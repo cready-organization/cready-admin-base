@@ -1,11 +1,15 @@
-import { useState, createRef, RefObject } from 'react';
+import React, { useState, createRef, RefObject } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Button, Textarea, TextField } from 'src/components';
+import { Button, Textarea, TextField, OtpInput } from 'src/components';
 import { TEXTFIELD_TYPE } from 'src/ultil/enum/app-enum';
 import LayoutLogin from 'src/core/layouts/auth/LayoutLogin';
 import axiosClient from 'src/services/axios';
 import forgotPasswordImg from 'src/assets/images/auth/forgot-password.png';
+
+// define class name for TextField
+const labelClassName = 'font-normal text-sm text-body-light-color';
+const inputClassName = ' font-normal text-sm text-text-color';
 
 function ForgotPassword() {
     // define state
@@ -26,14 +30,10 @@ function ForgotPassword() {
         newPassword: '',
         confirmPassword: '',
     });
-    const [varifyCode, setVarifyCode] = useState({
-        textCode1: '',
-        textCode2: '',
-        textCode3: '',
-        textCode4: '',
-        textCode5: '',
-        textCode6: '',
-    });
+
+    const [otpCode, setOtpCode] = useState('');
+
+    const [isDisableButton, setIsDisableButton] = useState(false);
 
     const navigate = useNavigate();
 
@@ -52,25 +52,22 @@ function ForgotPassword() {
         }
     };
 
-    // define class name for TextField
-    const labelClassName = 'font-normal text-sm text-body-light-color';
-    const inputClassName = ' font-normal text-sm text-text-color';
-    const wrapperClassName = 'ml-2 max-w-16 w-10 max-w-h-16 h-10 xs:w-12 xs:h-12 md:w-16 md:h-16';
-    const inputCodeClassName =
-        'font-normal text-body-dark-color text-center text-[20px] leading-[30px] xs:text-[24px] xs:leading-[24px] md:text-[28px] md:leading-[42px]';
-
     // STEP 1
     // send Email to server
     const handleSendMail = async () => {
         try {
-            if (identifyData.email) {
-                const response = await axiosClient.post(
-                    'https://cready-backend.onrender.com/user/request/forgot-pasword',
-                    { email: identifyData.email },
-                );
+            if (identifyData.email.length > 0) {
+                setIsDisableButton(true);
+                const response = await axiosClient.post('/request-forgot-password', { email: identifyData.email });
                 if (response.status === 200 || response.status === 201) {
                     setSteps(2);
+                    setIsDisableButton(false);
                 }
+            } else {
+                setErrorMessage({
+                    ...errorMessage,
+                    email: 'Please enter an email address.',
+                });
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
@@ -78,86 +75,54 @@ function ForgotPassword() {
                 ...errorMessage,
                 email: error.data.message[0],
             });
+            setIsDisableButton(false);
         }
     };
 
     //  STEP 2
-    // define array to save ref TextField
-    const elemRefs: Array<RefObject<HTMLDivElement>> = [];
-
     // handle input enter only one number
-    const onChangeTextCode = (e: React.SyntheticEvent<HTMLInputElement>, numberField: number) => {
-        let textCode = e.currentTarget.value;
-        if (textCode.length > 1) {
-            textCode = textCode.slice(-1);
-        }
-        setVarifyCode({
-            ...varifyCode,
-            [`textCode${numberField}`]: textCode,
-        });
+    const onChangeOtpCode = (value: string) => {
         setErrorMessage({
             ...errorMessage,
             secretNumber: '',
         });
-    };
 
-    // handle when enter the code will automatically tab
-    const handleAutoTab: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
-        const tabIndex = Number(e.currentTarget.getAttribute('data-index') || 0);
-        let elem: boolean | React.RefObject<HTMLDivElement> = false;
-        if (e.key === 'Backspace') {
-            elem = tabIndex > 0 && elemRefs[tabIndex - 1];
-        } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
-            if (varifyCode[`textCode${tabIndex + 1}` as keyof typeof varifyCode].length > 0) {
-                elem = tabIndex < elemRefs.length - 1 && elemRefs[tabIndex + 1];
-            }
-        } else {
-            setVarifyCode({
-                ...varifyCode,
-                [`textCode${tabIndex + 1}`]: '',
-            });
-        }
-
-        if (elem) {
-            if (elem.current) elem.current.focus();
-        }
+        return setOtpCode(value);
     };
 
     // define TextField enter the code
-    const blocks = Array.from({ length: 6 }, (element, index) => {
-        // define ref and push ref to array
-        const ref: React.LegacyRef<HTMLInputElement> = createRef();
-        elemRefs.push(ref);
-        return (
-            <TextField
-                key={index}
-                value={varifyCode[`textCode${index + 1}` as keyof typeof varifyCode]}
-                onChange={(e) => onChangeTextCode(e, index + 1)}
-                wrapperClassName={index === 0 ? 'ml-0 ' + wrapperClassName : wrapperClassName}
-                inputClassName={inputCodeClassName}
-                onKeyUp={handleAutoTab}
-                type={TEXTFIELD_TYPE.TEXT}
-                dataIndex={index}
-                ref={ref}
-            ></TextField>
-        );
-    });
+    // const blocks = Array.from({ length: 6 }, (element, index) => {
+    //     // define ref and push ref to array
+    //     const ref: React.LegacyRef<HTMLInputElement> = createRef();
+    //     elemRefs.push(ref);
+    //     return (
+    //         <TextField
+    //             key={index}
+    //             value={varifyCode[index]}
+    //             onChange={(e) => onChangeTextCode(e, index)}
+    //             wrapperClassName={index === 0 ? 'ml-0 ' + wrapperClassName : wrapperClassName}
+    //             inputClassName={inputCodeClassName}
+    //             onKeyUp={handleAutoTab}
+    //             type={TEXTFIELD_TYPE.TEXT}
+    //             dataIndex={index}
+    //             maxLength={1}
+    //             ref={ref}
+    //         ></TextField>
+    //     );
+    // });
 
     // handle send code
     const handleSendCode = async () => {
-        const secretNumber = Number(
-            Object.keys(varifyCode).reduce((prev, key) => {
-                return prev + varifyCode[key as keyof typeof varifyCode];
-            }, ''),
-        );
-
+        const secretNumber = Number(otpCode);
         try {
-            const response = await axiosClient.post('https://cready-backend.onrender.com/user/check-secret-code', {
+            setIsDisableButton(true);
+            const response = await axiosClient.post('/verify-pasword-reset-code', {
                 email: identifyData.email,
                 secretNumber,
             });
             if (response.status === 200 || response.status === 201) {
                 setSteps(3);
+                setIsDisableButton(false);
                 setIdentifyData({
                     ...identifyData,
                     secretNumber,
@@ -171,18 +136,31 @@ function ForgotPassword() {
                 ...errorMessage,
                 secretNumber: error.data.message,
             });
+            setIsDisableButton(false);
         }
     };
 
     // STEP 3
     const handleChangePassword = async () => {
         try {
-            const response = await axiosClient.post(
-                'https://cready-backend.onrender.com/user/forgot-pasword',
-                identifyData,
-            );
-            if (response.status === 200 || response.status === 201) {
-                navigate('/login', { replace: true });
+            if (identifyData.newPassword.length > 0 || identifyData.confirmPassword.length > 0) {
+                setIsDisableButton(true);
+                const response = await axiosClient.post('/forget-password', identifyData);
+                if (response.status === 200 || response.status === 201) {
+                    setIsDisableButton(false);
+                    navigate('/login', { replace: true });
+                }
+            } else {
+                if (identifyData.newPassword.length === 0)
+                    setErrorMessage({
+                        ...errorMessage,
+                        newPassword: 'Please enter an new password.',
+                    });
+                if (identifyData.confirmPassword.length === 0)
+                    setErrorMessage({
+                        ...errorMessage,
+                        confirmPassword: 'Please enter an confirm password.',
+                    });
             }
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -192,6 +170,22 @@ function ForgotPassword() {
                 newPassword: error.data.message[0],
                 confirmPassword: error.data.message[1],
             });
+            setIsDisableButton(false);
+        }
+    };
+
+    // Enter to click button
+    const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+        if (e.key === 'Enter') {
+            if (!isDisableButton) {
+                if (steps === 1) {
+                    handleSendMail();
+                } else if (steps === 2) {
+                    handleSendCode();
+                } else {
+                    handleChangePassword();
+                }
+            }
         }
     };
 
@@ -209,96 +203,105 @@ function ForgotPassword() {
                 Forgot Password
             </h3>
 
-            {/* Step 1: Send mail */}
-            {steps === 1 && (
-                <div className="w-full">
-                    <div className="mt-12 lg:mt-[42px]">
-                        <TextField
-                            value={identifyData.email}
-                            onChange={(e) => {
-                                setErrorMessage({
-                                    ...errorMessage,
-                                    email: '',
-                                });
-                                setIdentifyData({
-                                    ...identifyData,
-                                    email: e.currentTarget.value,
-                                });
-                            }}
-                            inputClassName={inputClassName}
-                            label="Email to Send Code"
-                            labelClassName={labelClassName}
-                            type={TEXTFIELD_TYPE.TEXT}
-                            autoFocus
-                            error={errorMessage.email}
-                        />
+            {/* Fields */}
+            <div className="w-full" onKeyDown={handleKeyDown}>
+                {/* Step 1: Send mail */}
+                {steps === 1 && (
+                    <div className="w-full">
+                        <div className="mt-12 lg:mt-[42px]">
+                            <TextField
+                                value={identifyData.email}
+                                onChange={(e) => {
+                                    setErrorMessage({
+                                        ...errorMessage,
+                                        email: '',
+                                    });
+                                    setIdentifyData({
+                                        ...identifyData,
+                                        email: e.currentTarget.value,
+                                    });
+                                }}
+                                inputClassName={inputClassName}
+                                label="Email to Send Code"
+                                labelClassName={labelClassName}
+                                type={TEXTFIELD_TYPE.TEXT}
+                                autoFocus
+                                error={errorMessage.email}
+                            />
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
-            {/* Step 2: Varify Code */}
-            {steps === 2 && (
-                <div className="mt-[42px] flex justify-between">
-                    {blocks.map((Item) => {
-                        return Item;
-                    })}
-                </div>
-            )}
+                {/* Step 2: Varify Code */}
+                {steps === 2 && <OtpInput value={otpCode} valueLength={6} onChange={onChangeOtpCode} />}
 
-            {/* Step 3: Change new password */}
-            {steps === 3 && (
-                <div className="w-full">
-                    <div className="mt-12 lg:mt-[42px]">
-                        <TextField
-                            inputClassName={inputClassName}
-                            label={'Password'}
-                            labelClassName={labelClassName}
-                            type={showPassword.newPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
-                            value={identifyData.newPassword}
-                            autoFocus
-                            onChange={(e) =>
-                                setIdentifyData({
-                                    ...identifyData,
-                                    newPassword: e.currentTarget.value,
-                                })
-                            }
-                            unit={showPassword.newPassword ? 'hide' : 'show'}
-                            onClickUnit={() => onClickUnit(true)}
-                            onFocus={() =>
-                                setErrorMessage({
-                                    ...errorMessage,
-                                    newPassword: '',
-                                })
-                            }
-                            error={errorMessage.newPassword}
-                        />
+                {/* Step 3: Change new password */}
+                {steps === 3 && (
+                    <div className="w-full">
+                        <div className="mt-12 lg:mt-[42px]">
+                            <TextField
+                                inputClassName={inputClassName}
+                                label={'Password'}
+                                labelClassName={labelClassName}
+                                type={showPassword.newPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
+                                value={identifyData.newPassword}
+                                autoFocus
+                                onChange={(e) =>
+                                    setIdentifyData({
+                                        ...identifyData,
+                                        newPassword: e.currentTarget.value,
+                                    })
+                                }
+                                unit={
+                                    showPassword.newPassword ? (
+                                        <i className="fa-light fa-eye"></i>
+                                    ) : (
+                                        <i className="fa-light fa-eye-slash"></i>
+                                    )
+                                }
+                                onClickUnit={() => onClickUnit(true)}
+                                onFocus={() =>
+                                    setErrorMessage({
+                                        ...errorMessage,
+                                        newPassword: '',
+                                    })
+                                }
+                                error={errorMessage.newPassword}
+                            />
+                        </div>
+                        <div className="mt-6">
+                            <TextField
+                                inputClassName={inputClassName}
+                                label={'Confirm Password'}
+                                labelClassName={labelClassName}
+                                type={showPassword.confirmPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
+                                value={identifyData.confirmPassword}
+                                onChange={(e) =>
+                                    setIdentifyData({
+                                        ...identifyData,
+                                        confirmPassword: e.currentTarget.value,
+                                    })
+                                }
+                                unit={
+                                    showPassword.confirmPassword ? (
+                                        <i className="fa-light fa-eye"></i>
+                                    ) : (
+                                        <i className="fa-light fa-eye-slash"></i>
+                                    )
+                                }
+                                onClickUnit={() => onClickUnit()}
+                                onFocus={() =>
+                                    setErrorMessage({
+                                        ...errorMessage,
+                                        confirmPassword: '',
+                                    })
+                                }
+                                error={errorMessage.confirmPassword}
+                            />
+                        </div>
                     </div>
-                    <div className="mt-6">
-                        <TextField
-                            inputClassName={inputClassName}
-                            label={'Confirm Password'}
-                            labelClassName={labelClassName}
-                            type={showPassword.confirmPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
-                            value={identifyData.confirmPassword}
-                            onChange={(e) =>
-                                setIdentifyData({
-                                    ...identifyData,
-                                    confirmPassword: e.currentTarget.value,
-                                })
-                            }
-                            unit={showPassword.confirmPassword ? 'hide' : 'show'}
-                            onClickUnit={() => onClickUnit()}
-                            onFocus={() =>
-                                setErrorMessage({
-                                    ...errorMessage,
-                                    confirmPassword: '',
-                                })
-                            }
-                            error={errorMessage.confirmPassword}
-                        />
-                    </div>
-                </div>
-            )}
+                )}
+            </div>
 
             {/* Error message Form */}
             {errorMessage.secretNumber && (
@@ -315,17 +318,23 @@ function ForgotPassword() {
                             {steps === 1 ? ' Send' : 'Verify Code'}
                         </span>
                         <Button
-                            customClassName="w-[70px] h-10 pt-0 pb-0 pl-0 pr-0 rounded-[20px]"
-                            onClick={steps === 1 ? handleSendMail : handleSendCode}
+                            customClassName={`w-[70px] h-10 pt-0 pb-0 pl-0 pr-0 rounded-[20px] ${
+                                isDisableButton && '!bg-border-color !text-body-light-color cursor-default'
+                            }`}
+                            onClick={isDisableButton ? undefined : steps === 1 ? handleSendMail : handleSendCode}
                         >
-                            <span className=" text-white m-auto">icon</span>
+                            <span className=" text-white m-auto">
+                                <i className="fa-light fa-arrow-right"></i>
+                            </span>
                         </Button>
                     </>
                 ) : (
                     <Button
                         fullWidth
-                        onClick={handleChangePassword}
-                        customClassName={'mb-[52px] mt-2 xxs:mt-8 h-10 flex flex-direction justify-center items-center'}
+                        onClick={isDisableButton ? undefined : handleChangePassword}
+                        customClassName={`mb-[52px] mt-2 xxs:mt-8 h-10 flex flex-direction justify-center items-center ${
+                            isDisableButton && '!bg-border-color !text-body-light-color cursor-default'
+                        }`}
                     >
                         <span className="font-medium text-base text-white">
                             Change Password
@@ -334,6 +343,14 @@ function ForgotPassword() {
                     </Button>
                 )}
             </div>
+
+            {/* Resend Code */}
+            {steps === 2 && (
+                <div className="w-full mt-3 text-right cursor-pointer" onClick={handleSendMail}>
+                    <span className="font-normal text-sm text-body-light-color underline">Resend Code?</span>
+                </div>
+            )}
+
             {/* Back Login to Admin */}
             <div className="mt-auto mb-0 xs:mb-6">
                 <span className="font-normal text-sm text-body-light-color">

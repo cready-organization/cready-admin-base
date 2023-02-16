@@ -15,6 +15,7 @@ module.exports = {
                 'dark-red-color': '#F05C54',
                 'orange-color': '#FF965D',
                 'overlay-color': 'rgba(0, 0, 0, 0.5)',
+                'border-color': '#E8E9EB',
                 'input-border-color': '#C4C4C4',
             },
             borderRadius: {

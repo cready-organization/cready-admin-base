@@ -8,11 +8,13 @@ interface ITextFieldProps extends IInputCommonProps<HTMLInputElement> {
     wrapperClassName?: string;
     labelClassName?: string;
     inputClassName?: string;
-    unit?: string;
+    unit?: string | JSX.Element;
     autoFocus?: boolean;
     dataIndex?: number;
+    maxLength?: number;
     onClickUnit?: (e: React.SyntheticEvent) => void;
     onKeyUp?: React.KeyboardEventHandler<HTMLDivElement>;
+    onKeyDown?: React.KeyboardEventHandler<HTMLDivElement>;
 }
 
 function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement>) {
@@ -30,7 +32,9 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
         disabled,
         autoFocus,
         dataIndex,
+        maxLength,
         onKeyUp,
+        onKeyDown,
         onFocus,
         onBlur,
         onChange,
@@ -61,9 +65,11 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
                     onBlur={onBlur}
                     onChange={onChange}
                     onKeyUp={onKeyUp}
+                    onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
                     ref={ref}
                     data-index={dataIndex}
+                    maxLength={maxLength}
                 />
                 {unit && (
                     <div className="px-3 py-2 h-10 cursor-pointer select-none" onClick={onClickUnit}>

@@ -81,7 +81,7 @@ function Login() {
 
     // define yup validation
     const userSchema: yup.SchemaOf<YupSchema> = yup.object({
-        username: yup.string().required(handleErrorMsg('username', 'Please enter an email address.')),
+        username: yup.string().required(handleErrorMsg('username', 'Please enter an username.')),
         password: yup.string().required(handleErrorMsg('password', 'Please enter an password.')),
     });
 
@@ -111,6 +111,7 @@ function Login() {
     // }
     const [errorResponse, setErrorResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isDisableButton, setIsDisableButton] = useState(false);
 
     const navigate = useNavigate();
 
@@ -119,9 +120,9 @@ function Login() {
             const data = await handleValidation();
             if (data) {
                 setIsLoading(true);
-                const response = await axiosClient.post('/user/login', data);
+                setIsDisableButton(true);
+                const response = await axiosClient.post('/login', data);
                 setIsLoading(false);
-
                 if (response.data) {
                     cookies.set('accessToken', response.data, { path: '/' });
                     navigate(isLoginDatabase ? '/database/dashboard' : '/dashboard', { replace: true });
@@ -130,6 +131,8 @@ function Login() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             setIsLoading(false);
+            setIsDisableButton(false);
+
             setErrorResponse(error.data.message);
         }
     };
@@ -181,7 +184,13 @@ function Login() {
                         type={showPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
                         value={inputData.password}
                         onChange={onChangePassword}
-                        unit={showPassword ? 'hide' : 'show'}
+                        unit={
+                            showPassword ? (
+                                <i className="fa-light fa-eye"></i>
+                            ) : (
+                                <i className="fa-light fa-eye-slash"></i>
+                            )
+                        }
                         onClickUnit={onClickUnit}
                         onFocus={() =>
                             setErrorMessage({
@@ -193,6 +202,7 @@ function Login() {
                     />
                 </div>
             </div>
+
             {/* Forgot password */}
             {!isLoginDatabase && (
                 <div className="w-full mt-3 text-right">
@@ -211,15 +221,17 @@ function Login() {
             <div className="w-full">
                 <Button
                     fullWidth
-                    onClick={handleUserLogin}
+                    onClick={isDisableButton ? undefined : handleUserLogin}
                     customClassName={
                         (isLoginDatabase ? 'mt-6 mb-[16px]' : 'mb-[52px] mt-2 xxs:mt-8') +
-                        ' h-10 flex flex-direction justify-center items-center'
+                        ` h-10 flex flex-direction justify-center items-center ${
+                            isDisableButton && '!bg-border-color !text-body-light-color cursor-default'
+                        }`
                     }
                 >
                     <span className="font-medium text-base text-white">
+                        {isLoading && <i className="fa-light fa-spinner-third mr-1 text-base animate-spin"></i>}
                         Login
-                        {isLoading && <p className="inline-block animate-bounce h-5 w-5">...</p>}
                     </span>
                 </Button>
             </div>
