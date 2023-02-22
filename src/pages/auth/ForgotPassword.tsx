@@ -1,4 +1,4 @@
-import React, { useState, createRef, RefObject } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Button, Textarea, TextField, OtpInput } from 'src/components';
@@ -33,9 +33,24 @@ function ForgotPassword() {
 
     const [otpCode, setOtpCode] = useState('');
 
-    const [isDisableButton, setIsDisableButton] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isWaitToResendCode, setIsWaitToResendCode] = useState(true);
+    const [countdown, setCountdown] = useState(60);
 
     const navigate = useNavigate();
+
+    const countSeconds = () => {
+        const timerId = setInterval(() => {
+            setCountdown((prevState) => {
+                if (prevState === 0) {
+                    clearInterval(timerId);
+                    setIsWaitToResendCode(false);
+                    return prevState;
+                }
+                return prevState - 1;
+            });
+        }, 1050);
+    };
 
     // handle show hide password
     const onClickUnit = (isNewPassword = false) => {
@@ -57,11 +72,11 @@ function ForgotPassword() {
     const handleSendMail = async () => {
         try {
             if (identifyData.email.length > 0) {
-                setIsDisableButton(true);
-                const response = await axiosClient.post('/request-forgot-password', { email: identifyData.email });
+                setIsLoading(true);
+                const response = await axiosClient.post('request-forgot-password', { email: identifyData.email });
                 if (response.status === 200 || response.status === 201) {
                     setSteps(2);
-                    setIsDisableButton(false);
+                    countSeconds();
                 }
             } else {
                 setErrorMessage({
@@ -73,9 +88,10 @@ function ForgotPassword() {
         } catch (error: any) {
             setErrorMessage({
                 ...errorMessage,
-                email: error.data.message[0],
+                email: error.data.message,
             });
-            setIsDisableButton(false);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -90,39 +106,17 @@ function ForgotPassword() {
         return setOtpCode(value);
     };
 
-    // define TextField enter the code
-    // const blocks = Array.from({ length: 6 }, (element, index) => {
-    //     // define ref and push ref to array
-    //     const ref: React.LegacyRef<HTMLInputElement> = createRef();
-    //     elemRefs.push(ref);
-    //     return (
-    //         <TextField
-    //             key={index}
-    //             value={varifyCode[index]}
-    //             onChange={(e) => onChangeTextCode(e, index)}
-    //             wrapperClassName={index === 0 ? 'ml-0 ' + wrapperClassName : wrapperClassName}
-    //             inputClassName={inputCodeClassName}
-    //             onKeyUp={handleAutoTab}
-    //             type={TEXTFIELD_TYPE.TEXT}
-    //             dataIndex={index}
-    //             maxLength={1}
-    //             ref={ref}
-    //         ></TextField>
-    //     );
-    // });
-
     // handle send code
     const handleSendCode = async () => {
         const secretNumber = Number(otpCode);
         try {
-            setIsDisableButton(true);
-            const response = await axiosClient.post('/verify-pasword-reset-code', {
+            setIsLoading(true);
+            const response = await axiosClient.post('verify-password-reset-code', {
                 email: identifyData.email,
                 secretNumber,
             });
             if (response.status === 200 || response.status === 201) {
                 setSteps(3);
-                setIsDisableButton(false);
                 setIdentifyData({
                     ...identifyData,
                     secretNumber,
@@ -131,12 +125,35 @@ function ForgotPassword() {
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-            console.log('[STEPS2: ERROR]', error);
             setErrorMessage({
                 ...errorMessage,
                 secretNumber: error.data.message,
             });
-            setIsDisableButton(false);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // handle resend code
+    const handleResendCode = async () => {
+        try {
+            setIsLoading(true);
+            setIsWaitToResendCode(true);
+            const response = await axiosClient.post('request-forgot-password', { email: identifyData.email });
+            if (response.status === 200 || response.status === 201) {
+                setCountdown(60);
+                countSeconds();
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            setIsWaitToResendCode(false);
+            setErrorMessage({
+                ...errorMessage,
+                secretNumber: error.data.message,
+            });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -144,10 +161,9 @@ function ForgotPassword() {
     const handleChangePassword = async () => {
         try {
             if (identifyData.newPassword.length > 0 || identifyData.confirmPassword.length > 0) {
-                setIsDisableButton(true);
-                const response = await axiosClient.post('/forget-password', identifyData);
+                setIsLoading(true);
+                const response = await axiosClient.post('forget-password', identifyData);
                 if (response.status === 200 || response.status === 201) {
-                    setIsDisableButton(false);
                     navigate('/login', { replace: true });
                 }
             } else {
@@ -170,14 +186,15 @@ function ForgotPassword() {
                 newPassword: error.data.message[0],
                 confirmPassword: error.data.message[1],
             });
-            setIsDisableButton(false);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     // Enter to click button
     const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
         if (e.key === 'Enter') {
-            if (!isDisableButton) {
+            if (!isLoading) {
                 if (steps === 1) {
                     handleSendMail();
                 } else if (steps === 2) {
@@ -318,27 +335,29 @@ function ForgotPassword() {
                             {steps === 1 ? ' Send' : 'Verify Code'}
                         </span>
                         <Button
-                            customClassName={`w-[70px] h-10 pt-0 pb-0 pl-0 pr-0 rounded-[20px] ${
-                                isDisableButton && '!bg-border-color !text-body-light-color cursor-default'
-                            }`}
-                            onClick={isDisableButton ? undefined : steps === 1 ? handleSendMail : handleSendCode}
+                            customClassName="w-[70px] h-10 pt-0 pb-0 pl-0 pr-0 rounded-[20px]"
+                            block={isLoading}
+                            onClick={steps === 1 ? handleSendMail : handleSendCode}
                         >
                             <span className=" text-white m-auto">
-                                <i className="fa-light fa-arrow-right"></i>
+                                {isLoading ? (
+                                    <i className="fa-light fa-spinner-third mr-1 text-base animate-spin"></i>
+                                ) : (
+                                    <i className="fa-light fa-arrow-right"></i>
+                                )}
                             </span>
                         </Button>
                     </>
                 ) : (
                     <Button
                         fullWidth
-                        onClick={isDisableButton ? undefined : handleChangePassword}
-                        customClassName={`mb-[52px] mt-2 xxs:mt-8 h-10 flex flex-direction justify-center items-center ${
-                            isDisableButton && '!bg-border-color !text-body-light-color cursor-default'
-                        }`}
+                        onClick={handleChangePassword}
+                        block={isLoading}
+                        customClassName="mb-[52px] mt-2 xxs:mt-8 h-10 flex flex-direction justify-center items-center"
                     >
                         <span className="font-medium text-base text-white">
+                            {isLoading && <i className="fa-light fa-spinner-third mr-1 text-base animate-spin"></i>}
                             Change Password
-                            {/* {isLoading && <p className="inline-block animate-bounce h-5 w-5">...</p>} */}
                         </span>
                     </Button>
                 )}
@@ -346,8 +365,25 @@ function ForgotPassword() {
 
             {/* Resend Code */}
             {steps === 2 && (
-                <div className="w-full mt-3 text-right cursor-pointer" onClick={handleSendMail}>
-                    <span className="font-normal text-sm text-body-light-color underline">Resend Code?</span>
+                <div
+                    className={
+                        'w-full mt-3 text-right ' + (isWaitToResendCode ? 'cursor-not-allowed' : 'cursor-pointer')
+                    }
+                    onClick={isWaitToResendCode ? undefined : handleResendCode}
+                >
+                    <span className="font-normal text-xs xs:text-sm text-body-light-color">
+                        {isWaitToResendCode && `Please wait ${countdown} seconds to `}
+                        <span
+                            className={
+                                'inline-flex items-center underline ' + (!isWaitToResendCode && 'text-dark-green-color')
+                            }
+                        >
+                            Resend Code
+                            <p className="ml-1 text-base xs:text-xl">
+                                <i className="fa-light fa-arrows-rotate"></i>
+                            </p>
+                        </span>
+                    </span>
                 </div>
             )}
 

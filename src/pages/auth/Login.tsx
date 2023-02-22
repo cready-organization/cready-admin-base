@@ -111,7 +111,6 @@ function Login() {
     // }
     const [errorResponse, setErrorResponse] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isDisableButton, setIsDisableButton] = useState(false);
 
     const navigate = useNavigate();
 
@@ -120,9 +119,8 @@ function Login() {
             const data = await handleValidation();
             if (data) {
                 setIsLoading(true);
-                setIsDisableButton(true);
-                const response = await axiosClient.post('/login', data);
-                setIsLoading(false);
+                const response = await axiosClient.post('login', data);
+
                 if (response.data) {
                     cookies.set('accessToken', response.data, { path: '/' });
                     navigate(isLoginDatabase ? '/database/dashboard' : '/dashboard', { replace: true });
@@ -130,10 +128,9 @@ function Login() {
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-            setIsLoading(false);
-            setIsDisableButton(false);
-
             setErrorResponse(error.data.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -221,12 +218,11 @@ function Login() {
             <div className="w-full">
                 <Button
                     fullWidth
-                    onClick={isDisableButton ? undefined : handleUserLogin}
+                    onClick={handleUserLogin}
+                    block={isLoading}
                     customClassName={
                         (isLoginDatabase ? 'mt-6 mb-[16px]' : 'mb-[52px] mt-2 xxs:mt-8') +
-                        ` h-10 flex flex-direction justify-center items-center ${
-                            isDisableButton && '!bg-border-color !text-body-light-color cursor-default'
-                        }`
+                        ' h-10 flex flex-direction justify-center items-center'
                     }
                 >
                     <span className="font-medium text-base text-white">
