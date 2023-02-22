@@ -33,9 +33,8 @@ axiosClient.interceptors.response.use(
             cookies.remove('username');
             cookies.remove('role');
             cookies.remove('accessToken');
-        } else {
-            return Promise.reject(response);
         }
+        return Promise.reject(response);
     },
 );
 export default axiosClient;

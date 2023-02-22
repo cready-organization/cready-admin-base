@@ -120,9 +120,8 @@ function Login() {
             if (data) {
                 setIsLoading(true);
                 const response = await axiosClient.post('login', data);
-
-                if (response.data) {
-                    cookies.set('accessToken', response.data, { path: '/' });
+                if (response) {
+                    cookies.set('accessToken', response, { path: '/' });
                     navigate(isLoginDatabase ? '/database/dashboard' : '/dashboard', { replace: true });
                 }
             }
@@ -163,6 +162,7 @@ function Login() {
                         type={TEXTFIELD_TYPE.TEXT}
                         value={inputData.username}
                         autoFocus
+                        readOnly={isLoading}
                         onChange={onChangeUserName}
                         onFocus={() =>
                             setErrorMessage({
@@ -180,6 +180,7 @@ function Login() {
                         labelClassName={labelClassName}
                         type={showPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
                         value={inputData.password}
+                        readOnly={isLoading}
                         onChange={onChangePassword}
                         unit={
                             showPassword ? (

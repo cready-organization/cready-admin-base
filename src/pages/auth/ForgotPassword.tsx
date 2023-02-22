@@ -243,6 +243,7 @@ function ForgotPassword() {
                                 labelClassName={labelClassName}
                                 type={TEXTFIELD_TYPE.TEXT}
                                 autoFocus
+                                readOnly={isLoading}
                                 error={errorMessage.email}
                             />
                         </div>
@@ -263,6 +264,7 @@ function ForgotPassword() {
                                 type={showPassword.newPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
                                 value={identifyData.newPassword}
                                 autoFocus
+                                readOnly={isLoading}
                                 onChange={(e) =>
                                     setIdentifyData({
                                         ...identifyData,
@@ -293,6 +295,7 @@ function ForgotPassword() {
                                 labelClassName={labelClassName}
                                 type={showPassword.confirmPassword ? TEXTFIELD_TYPE.TEXT : TEXTFIELD_TYPE.PASSWORD}
                                 value={identifyData.confirmPassword}
+                                readOnly={isLoading}
                                 onChange={(e) =>
                                     setIdentifyData({
                                         ...identifyData,

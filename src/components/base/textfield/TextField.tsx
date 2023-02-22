@@ -10,6 +10,7 @@ interface ITextFieldProps extends IInputCommonProps<HTMLInputElement> {
     inputClassName?: string;
     unit?: string | JSX.Element;
     autoFocus?: boolean;
+    readOnly?: boolean;
     dataIndex?: number;
     maxLength?: number;
     onClickUnit?: (e: React.SyntheticEvent) => void;
@@ -31,6 +32,7 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
         unit,
         disabled,
         autoFocus,
+        readOnly,
         dataIndex,
         maxLength,
         onKeyUp,
@@ -67,6 +69,7 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
                     onKeyUp={onKeyUp}
                     onKeyDown={onKeyDown}
                     autoFocus={autoFocus}
+                    readOnly={readOnly}
                     ref={ref}
                     data-index={dataIndex}
                     maxLength={maxLength}
