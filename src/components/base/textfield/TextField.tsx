@@ -82,7 +82,7 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
             </div>
 
             {error && (
-                <div className="text-right">
+                <div className="mt-1 font-normal text-xs leading-[18px] text-right">
                     <span className="text-orange-color">{error}</span>
                 </div>
             )}

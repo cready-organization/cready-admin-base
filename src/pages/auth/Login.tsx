@@ -212,7 +212,10 @@ function Login() {
             {/* Error message Form */}
             {errorResponse && (
                 <div className="w-full mt-2 xxs:mt-6">
-                    <span className="font-normal text-base text-dark-red-color">{errorResponse}</span>
+                    <span className="font-normal text-base text-dark-red-color">
+                        <i className="fa-light fa-circle-exclamation mr-1"></i>
+                        {errorResponse}
+                    </span>
                 </div>
             )}
             {/* Button */}
