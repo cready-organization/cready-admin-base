@@ -77,6 +77,10 @@ function ForgotPassword() {
                 if (response.status === 200 || response.status === 201) {
                     setSteps(2);
                     countSeconds();
+                    setErrorMessage({
+                        ...errorMessage,
+                        email: '',
+                    });
                 }
             } else {
                 setErrorMessage({
@@ -86,10 +90,18 @@ function ForgotPassword() {
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-            setErrorMessage({
-                ...errorMessage,
-                email: error.data.message,
-            });
+            const timeLeft = Number(error.data.timeLeft);
+            if (timeLeft) {
+                setErrorMessage({
+                    ...errorMessage,
+                    email: `Please wait ${timeLeft} seconds to resend code`,
+                });
+            } else {
+                setErrorMessage({
+                    ...errorMessage,
+                    email: error.data.message,
+                });
+            }
         } finally {
             setIsLoading(false);
         }
