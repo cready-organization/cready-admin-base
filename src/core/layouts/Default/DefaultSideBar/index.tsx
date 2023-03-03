@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from 'react';
+import { Link } from 'react-router-dom';
 import creadyLogo from 'src/assets/cready-basic-logo.png';
 import './style.scss';
 
@@ -41,7 +42,8 @@ export const MenuItem = ({
 
     return (
         <div className={`app-side-bar__menu-item ${stylingclass.menuItemGroup}`}>
-            <div
+            <Link
+                to={`/${item.key}`}
                 className={`app-side-bar__menu-item__content__wrap ${stylingclass.menuItemContentWrap} `}
                 style={{ backgroundColor: `${item.key === 'products' ? '#F9F9F9' : 'transparent'}` }}
             >
@@ -62,18 +64,19 @@ export const MenuItem = ({
                         <i className="fa-regular fa-chevron-down"></i>
                     </span>
                 ) : null}
-            </div>
+            </Link>
             {item.childList ? (
                 <div className={`app-side-bar__menu-item__child-list ${stylingclass.menuItemChildList}`}>
                     <div className={`app-side-bar__menu-item__child-list`}>
                         {item.childList.map((child) => {
                             return (
-                                <a
+                                <Link
+                                    to={`/${child.key}`}
                                     key={child.key}
                                     className={`app-side-bar__menu-item__child-item ${stylingclass.menuItemChildItem}`}
                                 >
                                     <div className="w-1.5 h-1.5 bg-blue-500 mr-3 rounded-full"></div> {child.name}
-                                </a>
+                                </Link>
                             );
                         })}
                     </div>
