@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TEXTFIELD_TYPE } from 'src/ultil/enum/app-enum';
-import { IInputCommonProps } from 'src/ultil/enum/app-interface';
+import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
+import { IInputCommonProps } from 'ultil/enum/app-interface';
 
 interface ITextFieldProps extends IInputCommonProps<HTMLInputElement> {
     type?: TEXTFIELD_TYPE;
