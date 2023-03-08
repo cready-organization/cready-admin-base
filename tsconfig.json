@@ -15,7 +15,10 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "baseUrl": "."
-        // "types": ["@emotion/core"],
-    }
+        "baseUrl": ".",
+        "paths": {
+            "src": ["./src"]
+        }
+    },
+    "include": ["src/declaration.d.ts", "src"]
 }
