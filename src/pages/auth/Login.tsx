@@ -223,7 +223,7 @@ function Login() {
                 <Button
                     fullWidth
                     onClick={handleUserLogin}
-                    block={isLoading}
+                    buttonType={isLoading ? 'disabled' : 'primary'}
                     customClassName={
                         (isLoginDatabase ? 'mt-6 mb-[16px]' : 'mb-[52px] mt-2 xxs:mt-8') +
                         ' h-10 flex flex-direction justify-center items-center'

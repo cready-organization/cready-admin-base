@@ -351,7 +351,7 @@ function ForgotPassword() {
                         </span>
                         <Button
                             customClassName="w-[70px] h-10 pt-0 pb-0 pl-0 pr-0 rounded-[20px]"
-                            block={isLoading}
+                            buttonType={isLoading ? 'disabled' : 'primary'}
                             onClick={steps === 1 ? handleSendMail : handleSendCode}
                         >
                             <span className=" text-white m-auto">
@@ -367,7 +367,7 @@ function ForgotPassword() {
                     <Button
                         fullWidth
                         onClick={handleChangePassword}
-                        block={isLoading}
+                        buttonType={isLoading ? 'disabled' : 'primary'}
                         customClassName="mb-[52px] mt-2 xxs:mt-8 h-10 flex flex-direction justify-center items-center"
                     >
                         <span className="font-medium text-base text-white">
