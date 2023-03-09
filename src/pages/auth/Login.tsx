@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { Cookies } from 'react-cookie';
-import { Button, TextField } from 'components';
-import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
-import databaseImg from 'assets/images/auth/database.png';
-import adminImg from 'assets/images/auth/web-analysis.png';
-import LayoutLogin from 'layouts/auth/LayoutLogin';
+import { Button, TextField } from '@/app/components';
+import { TEXTFIELD_TYPE } from '@/utils/declarations/app-enum';
+import databaseImg from '@/assets/images/auth/database.png';
+import adminImg from '@/assets/images/auth/web-analysis.png';
+import LayoutLogin from '@/app/layouts/auth/LayoutLogin';
 import axiosClient from 'services/axios';
-
 const cookies = new Cookies();
 
 function Login() {
@@ -80,7 +79,7 @@ function Login() {
   };
 
   // define yup validation
-  const userSchema: yup.SchemaOf<YupSchema> = yup.object({
+  const userSchema: yup.Schema<YupSchema> = yup.object({
     username: yup.string().required(handleErrorMsg('username', 'Please enter an username.')),
     password: yup.string().required(handleErrorMsg('password', 'Please enter an password.')),
   });
@@ -247,4 +246,3 @@ function Login() {
 }
 
 export default Login;
-

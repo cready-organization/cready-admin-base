@@ -6,7 +6,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -21,7 +20,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["@types/image.d.ts", "src"],
+  "include": ["@types/*.d.ts", "src"],
   "exclude": ["node_modules", "packages", "build"]
 }
-

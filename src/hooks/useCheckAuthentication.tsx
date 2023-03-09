@@ -1,4 +1,5 @@
 import { Cookies } from 'react-cookie';
+
 export const useCheckAuthentication = () => {
   const cookies = new Cookies();
   const haveToken = cookies.get('accessToken')?.length > 0;
@@ -6,4 +7,3 @@ export const useCheckAuthentication = () => {
   const isAuthenticated = haveToken;
   return isAuthenticated;
 };
-

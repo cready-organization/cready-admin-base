@@ -3,9 +3,8 @@
 # dependencies
 /node_modules
 /.pnp
+/.yarn
 .pnp.js
-packages/font-awesome-v6.2/svgs
-.yarn
 
 # testing
 /coverage
@@ -23,3 +22,9 @@ packages/font-awesome-v6.2/svgs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# svg in packages font-icon
+/src/packages/font-awesome-v6.2/svgs
+/src/packages/flaticon/svgs
+/packages/font-awesome-v6.2/svgs
+/packages/flaticon/svgs

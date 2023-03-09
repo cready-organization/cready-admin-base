@@ -1,0 +1,11 @@
+.App[data-theme='dark'] {
+  --body-bg: #15181a;
+  --text-color: #afafaf;
+  --admin-primary-color: #f9f9f9;
+}
+
+.App[data-theme='light'] {
+  --body-bg: #fafafa;
+  --text-color: #999999;
+  --admin-primary-color: #f9f9f9;
+}

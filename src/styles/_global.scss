@@ -1,0 +1,23 @@
+@import './variables';
+@import '../packages/flaticon/uicons/css/all/all.css';
+
+.App {
+  position: relative;
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  overflow-x: hidden;
+
+  a:-webkit-any-link {
+    color: var(--text-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .app-footer {
+    z-index: 3;
+  }
+}

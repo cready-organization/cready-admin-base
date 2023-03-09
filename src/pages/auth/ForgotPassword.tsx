@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Button, Textarea, TextField, OtpInput } from 'components';
-import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
-import LayoutLogin from 'layouts/auth/LayoutLogin';
+import { Button, Textarea, TextField, OtpInput } from '@/app/components';
+import { TEXTFIELD_TYPE } from '@/utils/declarations/app-enum';
 import axiosClient from 'services/axios';
 import forgotPasswordImg from 'assets/images/auth/forgot-password.png';
+import LayoutLogin from '@/app/layouts/auth/LayoutLogin';
 
 // define class name for TextField
 const labelClassName = 'font-normal text-sm text-body-light-color';
@@ -416,4 +416,3 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
-
