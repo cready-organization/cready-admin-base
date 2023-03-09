@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 
 import { Button, TextField } from 'components';
 import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
+import { BUTTON_TYPE } from 'ultil/enum/app-enum';
 
 const stylingListViewTypeClass = {
   textChildButton: 'p-4 relative -top-px',
@@ -20,7 +21,7 @@ function DefaultListViewType() {
       <header className="flex justify-between items-center">
         <h3 className="font-medium text-text-color text-[28px] leading-[42px]">Products</h3>
         <div className="flex items-center">
-          <Button buttonType="basic" customClassName="h-10 flex items-center">
+          <Button buttonType={BUTTON_TYPE.BASIC} customClassName="h-10 flex items-center">
             <i className="mr-[10px] fa-light fa-arrow-down-to-bracket"></i>
             Export
             <i className="ml-2 text-sm fa-light fa-chevron-down"></i>
@@ -65,17 +66,17 @@ function DefaultListViewType() {
             placeholder="Search product by code, name, barcode"
           />
           <div className="ml-24">
-            <Button customClassName={stylingListViewTypeClass.filterButton} buttonType="basic">
+            <Button customClassName={stylingListViewTypeClass.filterButton} buttonType={BUTTON_TYPE.BASIC}>
               Product Type
               <i className="ml-2 text-sm fa-light fa-chevron-down"></i>
             </Button>
-            <Button customClassName={stylingListViewTypeClass.filterButton} buttonType="basic">
+            <Button customClassName={stylingListViewTypeClass.filterButton} buttonType={BUTTON_TYPE.BASIC}>
               Customer Filter
               <i className="ml-2 text-sm fa-light fa-chevron-down"></i>
             </Button>
             <Button
               customClassName="h-10 border border-solid border-transparent bg-bg-color text-body-light-color"
-              buttonType="disabled"
+              buttonType={BUTTON_TYPE.DISABLED}
             >
               Save Filter
             </Button>
@@ -118,7 +119,7 @@ function DefaultListViewType() {
             <div className="text-body-light-color font-normal">
               <Button
                 customClassName="h-10 border border-solid border-border-color text-sm text-body-light-color font-normal"
-                buttonType="basic"
+                buttonType={BUTTON_TYPE.BASIC}
               >
                 10
                 <i className="ml-2 fa-light fa-chevron-down"></i>

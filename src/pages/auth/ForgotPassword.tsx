@@ -6,6 +6,7 @@ import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
 import LayoutLogin from 'layouts/auth/LayoutLogin';
 import axiosClient from 'services/axios';
 import forgotPasswordImg from 'assets/images/auth/forgot-password.png';
+import { BUTTON_TYPE } from 'ultil/enum/app-enum';
 
 // define class name for TextField
 const labelClassName = 'font-normal text-sm text-body-light-color';
@@ -233,7 +234,7 @@ function ForgotPassword() {
       </h3>
 
       {/* Fields */}
-      <div className="w-full" onKeyDown={handleKeyDown}>
+      <div className="w-full" onKeyDown={isLoading ? undefined : handleKeyDown}>
         {/* Step 1: Send mail */}
         {steps === 1 && (
           <div className="w-full">
@@ -351,7 +352,7 @@ function ForgotPassword() {
             </span>
             <Button
               customClassName="w-[70px] h-10 pt-0 pb-0 pl-0 pr-0 rounded-[20px]"
-              buttonType={isLoading ? 'disabled' : 'primary'}
+              buttonType={isLoading ? BUTTON_TYPE.DISABLED : BUTTON_TYPE.PRIMARY}
               onClick={steps === 1 ? handleSendMail : handleSendCode}
             >
               <span className=" text-white m-auto">
@@ -367,7 +368,7 @@ function ForgotPassword() {
           <Button
             fullWidth
             onClick={handleChangePassword}
-            buttonType={isLoading ? 'disabled' : 'primary'}
+            buttonType={isLoading ? BUTTON_TYPE.DISABLED : BUTTON_TYPE.PRIMARY}
             customClassName="mb-[52px] mt-2 xxs:mt-8 h-10 flex flex-direction justify-center items-center"
           >
             <span className="font-medium text-base text-white">
