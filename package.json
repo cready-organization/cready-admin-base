@@ -2,7 +2,7 @@
   "name": "cready-admin-base",
   "version": "0.1.0",
   "engines": {
-    "node": "18.14.2"
+    "node": "16.19.1"
   },
   "private": true,
   "dependencies": {
