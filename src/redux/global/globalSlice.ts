@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { loadState } from "src/helpers/localStorage";
+import { createSlice } from '@reduxjs/toolkit';
+import { loadState } from 'ultil/helpers/localStorage';
 
 export const globalSlice = createSlice({
-  name: "global",
+  name: 'global',
   initialState: {
-    theme: loadState("theme") || "dark",
-    language: loadState("language") || "EN",
+    theme: loadState('theme') || 'dark',
+    language: loadState('language') || 'EN',
   },
   reducers: {
     changeTheme(state, action) {
@@ -22,3 +22,4 @@ export const globalSlice = createSlice({
 export const selectGlobal = (state: any) => state.global;
 export const { changeTheme, changeLang } = globalSlice.actions;
 export default globalSlice.reducer;
+

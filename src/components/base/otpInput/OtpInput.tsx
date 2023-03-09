@@ -1,7 +1,7 @@
 import React, { useMemo, RefObject, createRef } from 'react';
 
-import { TextField } from 'src/components';
-import { TEXTFIELD_TYPE } from 'src/ultil/enum/app-enum';
+import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
+import { TextField } from '../textfield';
 
 interface OtpInputProps {
     value: string;

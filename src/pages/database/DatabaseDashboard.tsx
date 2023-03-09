@@ -1,4 +1,4 @@
-import {  Button } from "src/components";
+import {  Button } from "components";
 import { Cookies } from 'react-cookie';
 import { useNavigate, useLocation } from 'react-router-dom';
 
