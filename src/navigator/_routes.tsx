@@ -1,8 +1,8 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-const Dashboard = lazy(() => import("src/pages/admin/Dashboard"));
-const DatabaseDashboard = lazy(() => import("src/pages/database/DatabaseDashboard"));
+const Dashboard = lazy(() => import("pages/admin/Dashboard"));
+const DatabaseDashboard = lazy(() => import("pages/database/DatabaseDashboard"));
 
 const routes = [
   {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
-import { IInputCommonProps } from "src/ultil/enum/app-interface";
+import { IInputCommonProps } from "ultil/enum/app-interface";
 
 interface ITextareaProps extends IInputCommonProps<HTMLInputElement> {
   prefix?: React.ReactNode;

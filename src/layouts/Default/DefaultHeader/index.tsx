@@ -1,6 +1,6 @@
 import React from 'react';
 
-import avtExample from 'src/assets/images/header/avt-example.png';
+import avtExample from 'assets/images/header/avt-example.png';
 
 export default function DefaultHeader() {
     const stylingHeaderClass = {

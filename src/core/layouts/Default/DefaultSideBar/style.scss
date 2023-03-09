@@ -1,8 +1,0 @@
-@import 'src/scss/variables';
-
-.app-side-bar__menu-item__content__wrap {
-    transition: all 0.3s;
-    &:hover {
-        background-color: var(--admin-primary-color) !important;
-    }
-}

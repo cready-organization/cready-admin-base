@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 packages/font-awesome-v6.2/svgs
+.yarn
 
 # testing
 /coverage
