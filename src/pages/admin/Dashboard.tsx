@@ -1,11 +1,11 @@
-import { Button } from 'components';
-import * as React from 'react';
-import { Cookies } from 'react-cookie';
-import { useNavigate, useLocation } from 'react-router-dom';
+// import { Button } from 'components';
+// import * as React from 'react';
+// import { Cookies } from 'react-cookie';
+// import { useNavigate, useLocation } from 'react-router-dom';
 
-import DefaultListViewType from 'src/core/layouts/Default/DefaultListViewType';
+import DefaultListViewType from 'layouts/Default/DefaultListViewType';
 
-const cookies = new Cookies();
+// const cookies = new Cookies();
 
 function Dashboard() {
   // const navigate = useNavigate();
