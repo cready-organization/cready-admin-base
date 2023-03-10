@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ResetPassword() {
   return (
@@ -28,14 +28,13 @@ function ResetPassword() {
           data-mdb-ripple="true"
           data-mdb-ripple-color="light"
           style={{
-            background:
-              "linear-gradient(to right,#ee7724,#d8363a,#dd3675,#b44593)",
+            background: 'linear-gradient(to right,#ee7724,#d8363a,#dd3675,#b44593)',
           }}
         >
           Change password
         </button>
 
-        <Link className="text-gray-500 mt-6 inline-block" to={"/auth/login"}>
+        <Link className="text-gray-500 mt-6 inline-block" to={'/auth/login'}>
           Go back to Login page (This line will be removed on PROD)
         </Link>
       </div>

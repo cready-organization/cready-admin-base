@@ -1,0 +1,7 @@
+@import '../../../styles/variables';
+
+.app-side-bar__menu-item__content__wrap {
+  &:hover {
+    background-color: var(--admin-primary-color) !important;
+  }
+}

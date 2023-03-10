@@ -15,21 +15,21 @@ import background14 from 'assets/images/background/background-base-14.jpg';
 import background15 from 'assets/images/background/background-base-15.jpg';
 
 const backgroundList = [
-    background1,
-    background2,
-    background3,
-    background4,
-    background5,
-    background6,
-    background7,
-    background8,
-    background9,
-    background10,
-    background11,
-    background12,
-    background13,
-    background14,
-    background15,
+  background1,
+  background2,
+  background3,
+  background4,
+  background5,
+  background6,
+  background7,
+  background8,
+  background9,
+  background10,
+  background11,
+  background12,
+  background13,
+  background14,
+  background15,
 ];
 
 export default backgroundList;

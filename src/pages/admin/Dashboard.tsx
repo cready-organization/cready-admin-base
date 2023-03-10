@@ -1,5 +1,5 @@
-import { Button } from 'components';
-import * as React from 'react';
+import React from 'react';
+import { Button } from '@/app/components';
 import { Cookies } from 'react-cookie';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -28,4 +28,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
