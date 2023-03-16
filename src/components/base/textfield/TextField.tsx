@@ -56,7 +56,7 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
                     error ? 'border-orange-color text-orange-color' : ''
                 }`}
             >
-                {prefix && <div className="px-3 py-2.5 rounded-l-md bg-gray-50 border-r h-10 ">{prefix}</div>}
+                {prefix && <div className="px-3 py-2.5 rounded-l-default">{prefix}</div>}
                 <input
                     className={`w-full py-4 px-2.5 bg-transparent outline-none h-10  ${inputClassName}`}
                     type={type}
@@ -75,7 +75,7 @@ function TextField(props: ITextFieldProps, ref: React.LegacyRef<HTMLInputElement
                     maxLength={maxLength}
                 />
                 {unit && (
-                    <div className="px-3 py-2 h-10 cursor-pointer select-none" onClick={onClickUnit}>
+                    <div className="px-3 py-2 h-10 rounded-r-default cursor-pointer select-none" onClick={onClickUnit}>
                         {unit}
                     </div>
                 )}

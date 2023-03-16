@@ -8,6 +8,7 @@ import databaseImg from 'assets/images/auth/database.png';
 import adminImg from 'assets/images/auth/web-analysis.png';
 import LayoutLogin from 'layouts/auth/LayoutLogin';
 import axiosClient from 'services/axios';
+import { BUTTON_TYPE } from 'ultil/enum/app-enum';
 
 const cookies = new Cookies();
 
@@ -153,7 +154,7 @@ function Login() {
         {isLoginDatabase ? 'Login to Mange Database' : 'Welcome Back!'}
       </h3>
       {/* Fields */}
-      <div className="w-full" onKeyDown={handleKeyDown}>
+      <div className="w-full" onKeyDown={isLoading ? undefined : handleKeyDown}>
         <div className="mt-12 lg:mt-[42px]">
           <TextField
             inputClassName={inputClassName}
@@ -219,7 +220,7 @@ function Login() {
         <Button
           fullWidth
           onClick={handleUserLogin}
-          block={isLoading}
+          buttonType={isLoading ? BUTTON_TYPE.DISABLED : BUTTON_TYPE.PRIMARY}
           customClassName={
             (isLoginDatabase ? 'mt-6 mb-[16px]' : 'mb-[52px] mt-2 xxs:mt-8') +
             ' h-10 flex flex-direction justify-center items-center'
@@ -247,4 +248,3 @@ function Login() {
 }
 
 export default Login;
-
