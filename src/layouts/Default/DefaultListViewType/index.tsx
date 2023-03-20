@@ -22,21 +22,6 @@ const stylingListViewTypeClass = {
   paginateArrowButton: 'h-[34px] w-[34px] ml-2  bg-primary-alpha-color text-primary-color rounded-[10px]',
 };
 
-const gridCssClass = {
-  col: ' w-1/12',
-  col2: ' w-2/12',
-  col3: ' w-3/12',
-  col4: ' w-4/12',
-  col5: ' w-5/12',
-  col6: ' w-6/12',
-  col7: ' w-7/12',
-  col8: ' w-8/12',
-  col9: ' w-9/12',
-  col10: ' w-10/12',
-  col11: ' w-11/12',
-  col12: ' w-full',
-};
-
 function DefaultListViewType() {
   const [isList, setIsList] = useState(true);
 
@@ -110,308 +95,160 @@ function DefaultListViewType() {
             <table className="w-full text-left mb-7 table-auto">
               <thead>
                 <tr>
-                  <th className={stylingListViewTypeClass.tableColumnHeader + gridCssClass.col}>
+                  <th className={stylingListViewTypeClass.tableColumnHeader}>
                     <input className="" type="checkbox" />
                   </th>
-                  <th className={stylingListViewTypeClass.tableColumnHeader + gridCssClass.col4}>
-                    PRODUCT NAME
-                  </th>
-                  <th className={stylingListViewTypeClass.tableColumnHeader + gridCssClass.col2}>
-                    PRODUCT TYPE
-                  </th>
-                  <th
-                    className={stylingListViewTypeClass.tableColumnHeader + gridCssClass.col2 + ' text-right'}
-                  >
+                  <th className={stylingListViewTypeClass.tableColumnHeader}>PRODUCT NAME</th>
+                  <th className={stylingListViewTypeClass.tableColumnHeader}>PRODUCT TYPE</th>
+                  <th className={stylingListViewTypeClass.tableColumnHeader + ' text-right'}>
                     QUANTITY ON HAND
                   </th>
-                  <th
-                    className={stylingListViewTypeClass.tableColumnHeader + gridCssClass.col2 + ' text-right'}
-                  >
+                  <th className={stylingListViewTypeClass.tableColumnHeader + ' text-right'}>
                     FORECASTED QUANTITY
                   </th>
-                  <th className={stylingListViewTypeClass.tableColumnHeader + gridCssClass.col}>
+                  <th className={stylingListViewTypeClass.tableColumnHeader}>
                     <i className="fa-light fa-sliders-simple"></i>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
                 <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     <input type="checkbox" />
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col4}>
+                  <td className={stylingListViewTypeClass.tableColumnBody}>
                     MacBook Pro 15 Retina Touch Bar MV902
                   </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2}>
-                    Storable Product
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    10
-                  </td>
-                  <td
-                    className={stylingListViewTypeClass.tableColumnBody + gridCssClass.col2 + ' text-right'}
-                  >
-                    20
-                  </td>
-                  <td
-                    className={
-                      stylingListViewTypeClass.tableColumnBody + gridCssClass.col + ' text-dark-yellow-color'
-                    }
-                  >
+                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
+                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-dark-yellow-color'}>
                     <i className="fa-light fa-hexagon-exclamation"></i>
                   </td>
                 </tr>
