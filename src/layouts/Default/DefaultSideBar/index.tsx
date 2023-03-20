@@ -35,7 +35,7 @@ export default function DefaultSideBar() {
   return (
     <div className={`app-side-bar__wrap `}>
       <div
-        className={`app-side-bar__logo w-full bg-no-repeat mx-6`}
+        className={`app-side-bar__logo w-64 bg-no-repeat mx-6`}
         style={{ backgroundImage: `url(${creadyLogo})`, height: '55px' }}
       ></div>
       <div className={`app-side-bar__menu-group`}>
@@ -44,4 +44,3 @@ export default function DefaultSideBar() {
     </div>
   );
 }
-
