@@ -14,10 +14,10 @@ export default function DefaultLayout() {
   return (
     <div className="app-layout__wrap">
       <div className="app-layout flex flex-row">
-        <div className="app-side-bar w-1/6 min-h-screen bg-white border-r-2 border-gray-100 py-3 ">
+        <div className="app-side-bar flex-[0_0_270px] min-h-screen bg-white border-r-2 border-gray-100 py-3 ">
           <DefaultSideBar />
         </div>
-        <div className="app-main w-5/6">
+        <div className="app-main grow basis-0 max-w-full">
           <div className="app-header bg-white border-b-2 border-gray-100 py-3 px-6">
             <DefaultHeader />
           </div>
