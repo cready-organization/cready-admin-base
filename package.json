@@ -1,6 +1,9 @@
 {
   "name": "cready-admin-base",
   "version": "0.1.0",
+  "engines": {
+    "node": "16.19.1"
+  },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
@@ -15,17 +18,21 @@
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
+    "react-paginate": "^8.1.4",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1",
+    "sass": "^1.58.3",
     "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write '**/*.{ts,tsx,html,sass,scss,css,json}'"
   },
   "eslintConfig": {
     "extends": [

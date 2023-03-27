@@ -1,8 +1,8 @@
-import classNames from "classnames";
 import * as React from "react";
-import { IInputCommonProps } from "src/helpers/app-interface";
+import classNames from "classnames";
+import { IInputCommonProps } from "ultil/enum/app-interface";
 
-interface ITextareaProps extends React.PropsWithChildren, IInputCommonProps {
+interface ITextareaProps extends IInputCommonProps<HTMLInputElement> {
   prefix?: React.ReactNode;
   wrapperClassName?: string;
   inputClassName?: string;
@@ -43,7 +43,7 @@ function Textarea(props: ITextareaProps) {
           disabled={disabled}
           onFocus={onFocus}
           onBlur={onBlur}
-          onChange={onChange}
+          onChange={() => onChange}
         />
       </div>
       {error && (
