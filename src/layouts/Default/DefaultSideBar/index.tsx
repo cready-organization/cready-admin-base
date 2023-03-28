@@ -33,11 +33,13 @@ export const MenuGroup = ({ itemList }: { itemList: typeof menuItemList }): Reac
 
 export default function DefaultSideBar() {
   return (
-    <div className={`app-side-bar__wrap `}>
-      <div
-        className={`app-side-bar__logo w-64 bg-no-repeat mx-6`}
-        style={{ backgroundImage: `url(${creadyLogo})`, height: '55px' }}
-      ></div>
+    <div className={`app-side-bar__wrap w-full`}>
+      <div className="px-6 w-full">
+        <div
+          className={`app-side-bar__logo bg-no-repeat`}
+          style={{ backgroundImage: `url(${creadyLogo})`, height: '55px' }}
+        ></div>
+      </div>
       <div className={`app-side-bar__menu-group`}>
         <MenuGroup itemList={menuItemList} />
       </div>
