@@ -2,10 +2,11 @@ import React, { useState, useSyncExternalStore } from 'react';
 import ReactPaginate from 'react-paginate';
 
 import { useWindowDimensions } from 'hooks';
-import { Button, TextField } from 'components';
+import { Button, TextField, Skeleton, Checkbox } from 'components';
 import { TEXTFIELD_TYPE } from 'ultil/enum/app-enum';
 import { BUTTON_TYPE } from 'ultil/enum/app-enum';
 import defaultImage from 'assets/default-image.png';
+import { useGetProductsQuery } from 'redux/rtkQueryServices/products.service';
 
 const stylingListViewTypeClass = {
   textChildButton: 'p-4 relative -top-px hover:cursor-pointer',
@@ -26,9 +27,36 @@ const stylingListViewTypeClass = {
 function DefaultListViewType() {
   const [isList, setIsList] = useState(true);
   const { width } = useWindowDimensions();
+  const [checkedList, setCheckedList] = useState<string[]>([]);
+  const [isCheckAll, setIsCheckAll] = useState(false);
+
+  const { data, isFetching } = useGetProductsQuery();
+
+  const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, id } = e.target;
+    const newCheckList = [...checkedList];
+    if (checked) {
+      newCheckList.push(id);
+    } else {
+      const indexCheckedId = newCheckList.findIndex((itemId) => itemId === id);
+      newCheckList.splice(indexCheckedId, 1);
+    }
+    setCheckedList(newCheckList);
+  };
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    let newCheckAllList: string[] = [];
+    setIsCheckAll(checked);
+    if (checked) {
+      newCheckAllList = data?.map((item) => item.id) || [];
+    }
+    setCheckedList(newCheckAllList);
+  };
 
   return (
     <div className="p-6">
+      <i className="fa-light fa-check"></i>
       <div className="flex items-center">
         <h3 className="font-medium text-text-color text-[28px] leading-[42px]">Products</h3>
         <div className="ml-auto flex items-center">
@@ -94,12 +122,18 @@ function DefaultListViewType() {
           </div>
         </div>
         <div className="p-4">
-          {isList && (
+          {isFetching && <Skeleton />}
+          {!isFetching && isList && (
             <table className={`w-full text-left mb-7 ${width > 1400 ? 'table-auto' : 'table-fixed'}`}>
               <thead>
-                <tr>
+                <tr className="border-b border-border-color border-solid">
                   <th className={stylingListViewTypeClass.tableColumnHeader + ' w-14'}>
-                    <input className="" type="checkbox" />
+                    <Checkbox
+                      id="selectAll"
+                      name="selectAll"
+                      checked={isCheckAll}
+                      onChange={handleSelectAll}
+                    />
                   </th>
                   <th className={stylingListViewTypeClass.tableColumnHeader}>PRODUCT NAME</th>
                   <th className={stylingListViewTypeClass.tableColumnHeader}>PRODUCT TYPE</th>
@@ -115,105 +149,51 @@ function DefaultListViewType() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className={stylingListViewTypeClass.tableColumnBody + ' w-14'}>
-                    <input type="checkbox" />
-                  </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody}>
-                    MacBook Pro 15 Retina Touch Bar MV902
-                  </td>
-                  <td className={stylingListViewTypeClass.tableColumnBody}>Storable Product</td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>10</td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>20</td>
-                  <td className={stylingListViewTypeClass.tableColumnBody + ' w-8 text-dark-yellow-color'}>
-                    <i className="fa-light fa-hexagon-exclamation"></i>
-                  </td>
-                </tr>
+                {data?.map((product) => (
+                  <tr className="border-b border-border-color border-solid" key={product.id}>
+                    <td className={stylingListViewTypeClass.tableColumnBody + ' w-14'}>
+                      <Checkbox
+                        id={product.id}
+                        name={product.productName}
+                        checked={checkedList.includes(product.id)}
+                        onChange={handleChecked}
+                      />
+                    </td>
+                    <td className={stylingListViewTypeClass.tableColumnBody}>{product.productName}</td>
+                    <td className={stylingListViewTypeClass.tableColumnBody}>{product.grapeType}</td>
+                    <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>
+                      {product.quantity}
+                    </td>
+                    <td className={stylingListViewTypeClass.tableColumnBody + ' text-right'}>
+                      {product.quantity}
+                    </td>
+                    <td className={stylingListViewTypeClass.tableColumnBody + ' w-8 text-dark-yellow-color'}>
+                      <i className="fa-light fa-hexagon-exclamation"></i>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           )}
-          {!isList && (
+          {!isFetching && !isList && (
             <div className="grid grid-cols-5 gap-4 mb-20">
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
+              {data?.map((product) => (
+                <div key={product.id} className="w-full border border-solid border-border-color rounded-2xl">
+                  <img
+                    className="w-full"
+                    src={
+                      // product.imageUrl.find((img) => img.type === 'PRODUCT_THUBNAIL')?.imageUrl ||
+                      defaultImage
+                    }
+                    alt=""
+                  />
+                  <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
+                    <h3>{product.productName}</h3>
+                    <span>{`Price: ${product.priceDefault}đ`}</span>
+                    <span>{`On hand: ${product.quantity} Units`}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
-              <div className="w-full border border-solid border-border-color rounded-2xl">
-                <img className="w-full" src={defaultImage} alt="" />
-                <div className="p-3 grid gap-2 font-normal text-xs text-text-color">
-                  <h3>Apple iPhone 11 Pro Max 256GB Space Gray</h3>
-                  <span>{`Price: 1,000,000đ`}</span>
-                  <span>On hand: 10 Units</span>
-                </div>
-              </div>
+              ))}
             </div>
           )}
           <footer className="flex items-center">

@@ -1,0 +1,49 @@
+@import 'scss/variables';
+
+// block cursor-pointer w-4 h-4
+.custom-input {
+  display: block;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+input:checked ~ .custom-input::before {
+  background-color: #0469e3;
+}
+
+.custom-input::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  border: 1px solid #e8e9eb;
+  border-radius: 4px;
+}
+
+input:checked ~ .custom-input::after {
+  content: '\f00c';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 28%;
+  left: 58%;
+  color: white;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: 800;
+  font-family: 'Font Awesome 6 Pro';
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+// " before:content-[''] before:absolute bg-primary-color before:bg-bg-color before:w-4 before:h-4"
+// ' before:top-2/4 before:left-2/4 before:-translate-x-2/4 before:-translate-y-2/4
+// before:border before:border-solid before:border-border-color before:rounded' +
+
+// after:content-[''] after:absolute after:w-[5px] after:h-[9px] after:top-[2px] after:left-[5.6px] after:rotate-45"
+// after:peer-checked/custom-input:border-r-2 after:peer-checked/custom-input:border-b-2 after:peer-checked/custom-input:border-solid after:border-white'
