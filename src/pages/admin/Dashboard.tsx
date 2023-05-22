@@ -3,8 +3,6 @@
 // import { Cookies } from 'react-cookie';
 // import { useNavigate, useLocation } from 'react-router-dom';
 
-import DefaultListViewType from 'layouts/Default/DefaultListViewType';
-
 // const cookies = new Cookies();
 
 function Dashboard() {
@@ -17,11 +15,8 @@ function Dashboard() {
   //   navigate(path, { replace: true });
   // };
 
-  return (
-    <div>
-      <DefaultListViewType />
-    </div>
-  );
+  return <div>Dashboard</div>;
 }
 
 export default Dashboard;
+

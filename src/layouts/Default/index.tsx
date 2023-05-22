@@ -30,3 +30,4 @@ export default function DefaultLayout() {
     </div>
   );
 }
+
